@@ -47,6 +47,13 @@ export default function AboutPage() {
               moderated and may be removed if they are abusive or spam.
             </p>
           </section>
+          <section aria-labelledby="references-title">
+            <h2 id="references-title">References</h2>
+            <p>
+              A Trace may refer to another Trace using its number, such as
+              #0021. Existing Trace numbers are clickable.
+            </p>
+          </section>
         </section>
       </main>
 

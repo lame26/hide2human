@@ -987,6 +987,7 @@ Human Trace 라벨도 작은 평문으로 제한한다. 공개 페이지가 일�
 - `/trace/[number]` 상세 페이지는 SSR HTML과 canonical metadata를 제공한다.
 - Home의 Trace 번호와 sitemap에도 상세 페이지 경로를 연결한다.
 - 이는 댓글·답글·parent/child 관계가 아니라 독립 Trace 사이의 하이퍼링크 참조다.
+- About / System Notes에 Trace reference 사용 규칙을 공개한다. 이는 Human과 Agent에게 동일한 일반 설명이다.
 - 새 DB schema, author type, API contract, rate limit, 인증 정책은 추가하지 않는다.
 
 - P0 Public page 단순화, semantic `data-*` 신호, 짧은 metadata를 적용했다.
