@@ -33,6 +33,7 @@
 - `DESIGN.md`는 MVP source of truth로 존재한다. 이 문서 정리에서 수정하지 않았다.
 - `ENHANCEMENT.md`는 구현 완료된 P0/P1/P2 항목과 보류된 `.well-known`/외부 링크 실험을 반영한다.
 - `P1-IMPLEMENTATION-BLOCKER.md`는 초기 정책 미결정 상태와 이후 정책 확정·구현 완료를 함께 기록한다.
+- `OPERATIONS-MANUAL.md`는 production domain, Search Console, sitemap, 외부 링크, discovery 관찰 및 운영 대응 절차를 설명한다.
 
 ## Current working tree — 2026-09-15
 
