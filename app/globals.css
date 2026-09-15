@@ -1,0 +1,282 @@
+:root {
+  color-scheme: light;
+  --background: #f4f1eb;
+  --foreground: #25231f;
+  --muted: #716c63;
+  --line: #d8d1c5;
+  --accent: #914e32;
+  --surface: #fbfaf7;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--background);
+}
+
+body {
+  margin: 0;
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.6;
+}
+
+a {
+  color: inherit;
+}
+
+.site-shell {
+  width: min(100% - 2rem, 60rem);
+  margin: 0 auto;
+}
+
+.site-header,
+.site-footer {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.5rem 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.site-footer {
+  align-items: flex-start;
+  border-top: 1px solid var(--line);
+  border-bottom: 0;
+  margin-top: 5rem;
+  padding-bottom: 2rem;
+  color: var(--muted);
+  font-size: 0.875rem;
+}
+
+.wordmark {
+  font-size: 0.875rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-decoration: none;
+}
+
+.eyebrow,
+.kicker,
+.trace-label,
+.trace-status {
+  color: var(--muted);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.eyebrow,
+.kicker,
+.trace-label,
+.trace-status,
+.site-footer p {
+  margin: 0;
+}
+
+main {
+  max-width: 48rem;
+  margin: 0 auto;
+}
+
+section {
+  padding: 5rem 0;
+}
+
+h1,
+h2,
+p {
+  margin-top: 0;
+}
+
+h1,
+h2 {
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+}
+
+h1 {
+  max-width: 36rem;
+  margin-bottom: 1.5rem;
+  font-size: clamp(2.5rem, 8vw, 5rem);
+}
+
+h2 {
+  margin-bottom: 1rem;
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+}
+
+.intro {
+  min-height: 32rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.lead {
+  max-width: 38rem;
+  font-size: 1.25rem;
+}
+
+.intro > p:not(.kicker):last-child {
+  max-width: 34rem;
+  color: var(--muted);
+}
+
+.section-heading {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+  align-items: flex-end;
+  margin-bottom: 2rem;
+}
+
+.section-note {
+  max-width: 18rem;
+  margin-bottom: 0.5rem;
+  color: var(--muted);
+  font-size: 0.875rem;
+}
+
+.trace-list {
+  border-top: 1px solid var(--line);
+}
+
+.trace {
+  padding: 1.5rem 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.trace-message {
+  margin: 1rem 0;
+  font-size: 1.125rem;
+}
+
+.trace time {
+  color: var(--muted);
+  font-size: 0.875rem;
+}
+
+.trace-status {
+  margin-top: 0.75rem;
+  font-size: 0.65rem;
+}
+
+.trace-form {
+  display: grid;
+  gap: 0.75rem;
+  max-width: 34rem;
+}
+
+.trace-form label {
+  font-weight: 700;
+}
+
+.trace-form textarea {
+  width: 100%;
+  resize: vertical;
+  border: 1px solid var(--line);
+  border-radius: 0;
+  background: var(--surface);
+  color: var(--foreground);
+  font: inherit;
+  padding: 0.75rem;
+}
+
+.trace-form input {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 0;
+  background: var(--surface);
+  color: var(--foreground);
+  font: inherit;
+  padding: 0.75rem;
+}
+
+.form-help,
+.form-status {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.875rem;
+}
+
+.admin-toolbar,
+.stats-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.admin-toolbar {
+  align-items: center;
+  margin-top: 1.5rem;
+}
+
+.admin-toolbar button,
+.trace > button {
+  border: 1px solid var(--foreground);
+  border-radius: 0;
+  background: transparent;
+  color: var(--foreground);
+  font: inherit;
+  padding: 0.5rem 0.75rem;
+}
+
+.stats-grid {
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  padding: 1rem 0;
+}
+
+.stats-grid p {
+  min-width: 8rem;
+  color: var(--muted);
+  font-size: 0.875rem;
+}
+
+.stats-grid strong {
+  display: block;
+  color: var(--foreground);
+  font-size: 1.1rem;
+}
+
+.trace-form button {
+  width: fit-content;
+  border: 1px solid var(--foreground);
+  border-radius: 0;
+  background: var(--foreground);
+  color: var(--surface);
+  font: inherit;
+  padding: 0.65rem 1rem;
+}
+
+.trace-form button:disabled,
+.trace-form textarea:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+@media (max-width: 42rem) {
+  .site-header,
+  .site-footer,
+  .section-heading {
+    display: block;
+  }
+
+  .eyebrow,
+  .section-note {
+    margin-top: 0.5rem;
+  }
+
+  section {
+    padding: 3.5rem 0;
+  }
+
+  .intro {
+    min-height: 28rem;
+  }
+}
