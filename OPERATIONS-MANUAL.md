@@ -12,13 +12,13 @@
 
 | 항목 | 예시 |
 |---|---|
-| Production URL | `https://example.com` |
+| Production URL | `https://hide2human.vercel.app` |
 | Vercel 프로젝트 | `hide2human` |
 | Supabase 프로젝트 | production Supabase project |
 | 관리자 이메일 | 운영 관리자 계정 |
 | GitHub repository | `https://github.com/OWNER/REPOSITORY` |
 
-이 문서의 `https://example.com`은 실제 production URL로 바꿔 사용한다.
+이 문서의 production URL은 `https://hide2human.vercel.app`이다.
 
 ### 1.1 Production URL 확인
 
@@ -29,7 +29,7 @@ Vercel 대시보드에서 다음을 확인한다.
 3. 사용할 production domain을 추가한다.
 4. DNS 제공업체에 Vercel이 안내하는 레코드를 추가한다.
 5. Vercel에서 domain 상태가 `Valid Configuration`이 될 때까지 기다린다.
-6. 브라우저에서 `https://example.com`이 정상적으로 열리는지 확인한다.
+6. 브라우저에서 `https://hide2human.vercel.app`이 정상적으로 열리는지 확인한다.
 
 ### 1.2 Vercel 환경변수 확인
 
@@ -39,7 +39,7 @@ Vercel 프로젝트의 **Settings → Environment Variables**에서 Production �
 NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
 SUPABASE_SERVICE_ROLE_KEY=your-service-role-key
-NEXT_PUBLIC_SITE_URL=https://example.com
+NEXT_PUBLIC_SITE_URL=https://hide2human.vercel.app
 ```
 
 주의:
@@ -54,11 +54,11 @@ NEXT_PUBLIC_SITE_URL=https://example.com
 배포 후 다음 URL을 브라우저 또는 터미널에서 확인한다.
 
 ```bash
-curl -I https://example.com/
-curl -I https://example.com/about
-curl -I https://example.com/robots.txt
-curl -I https://example.com/sitemap.xml
-curl -I https://example.com/trace-feed.json
+curl -I https://hide2human.vercel.app/
+curl -I https://hide2human.vercel.app/about
+curl -I https://hide2human.vercel.app/robots.txt
+curl -I https://hide2human.vercel.app/sitemap.xml
+curl -I https://hide2human.vercel.app/trace-feed.json
 ```
 
 정상적으로 기대하는 상태:
@@ -74,13 +74,13 @@ curl -I https://example.com/trace-feed.json
 ### 2.1 Sitemap 내용 확인
 
 ```bash
-curl -fsS https://example.com/sitemap.xml
+curl -fsS https://hide2human.vercel.app/sitemap.xml
 ```
 
 다음 조건을 확인한다.
 
-- `https://example.com`이 포함되어 있다.
-- `https://example.com/about`가 포함되어 있다.
+- `https://hide2human.vercel.app`이 포함되어 있다.
+- `https://hide2human.vercel.app/about`가 포함되어 있다.
 - `localhost`가 포함되어 있지 않다.
 - `/admin`, `/api`가 포함되어 있지 않다.
 - XML이 깨지지 않았다.
@@ -88,7 +88,7 @@ curl -fsS https://example.com/sitemap.xml
 ### 2.2 Robots 내용 확인
 
 ```bash
-curl -fsS https://example.com/robots.txt
+curl -fsS https://hide2human.vercel.app/robots.txt
 ```
 
 현재 의도한 형태는 다음과 같다.
@@ -99,7 +99,7 @@ Allow: /about
 Allow: /trace-feed.json
 Disallow: /admin
 Disallow: /api
-Sitemap: https://example.com/sitemap.xml
+Sitemap: https://hide2human.vercel.app/sitemap.xml
 ```
 
 `robots.txt`는 보안 기능이 아니다. 관리자 보호는 Supabase Auth와 서버 권한 검사로 처리한다.
@@ -107,7 +107,7 @@ Sitemap: https://example.com/sitemap.xml
 ### 2.3 초기 HTML 확인
 
 ```bash
-curl -fsSL https://example.com/ | grep -E \
+curl -fsSL https://hide2human.vercel.app/ | grep -E \
 '<title>|description|canonical|application/ld\+json|data-purpose|<article|<form'
 ```
 
@@ -134,7 +134,7 @@ Search Console은 Google 검색 색인 상태를 확인하는 도구다. Search 
 2. 왼쪽 상단 속성 선택 메뉴에서 **속성 추가**를 선택한다.
 3. 가능하면 **도메인 속성**을 사용한다.
 4. 실제 domain을 입력한다.
-   - 예: `example.com`
+   - 예: `hide2human.vercel.app`
    - `https://`와 경로는 입력하지 않는다.
 5. Google이 제시한 DNS TXT 레코드를 복사한다.
 6. DNS 제공업체에 TXT 레코드를 추가한다.
@@ -146,7 +146,7 @@ DNS 반영에는 시간이 걸릴 수 있다. 확인 실패 시 TXT 레코드 �
 
 도메인 DNS를 관리할 수 없으면 URL-prefix 속성을 사용할 수 있다.
 
-1. `https://example.com/`을 입력한다.
+1. `https://hide2human.vercel.app/`을 입력한다.
 2. HTML tag, Google Analytics, Google Tag Manager 또는 HTML 파일 방식 중 하나를 선택한다.
 3. 현재 프로젝트 구조에 불필요한 tracking script를 추가하지 않으려면 DNS 검증을 우선한다.
 
@@ -167,7 +167,7 @@ sitemap.xml
 Sitemap URL 전체를 요구하는 화면이라면 다음을 사용한다.
 
 ```text
-https://example.com/sitemap.xml
+https://hide2human.vercel.app/sitemap.xml
 ```
 
 ### 3.4 색인 확인
@@ -176,10 +176,10 @@ https://example.com/sitemap.xml
 
 다음 방법으로 확인한다.
 
-- Search Console의 **URL 검사**에 `https://example.com/` 입력
+- Search Console의 **URL 검사**에 `https://hide2human.vercel.app/` 입력
 - **색인 생성 요청** 선택
 - 며칠 뒤 **페이지 색인 생성** 보고서 확인
-- Google 검색에서 `site:example.com` 검색
+- Google 검색에서 `site:hide2human.vercel.app` 검색
 
 색인 요청을 반복해서 누르거나 여러 URL을 대량 제출하지 않는다.
 
@@ -207,7 +207,7 @@ Google 외 검색 crawler의 발견 가능성도 관찰하려면 Bing Webmaster 
 4. sitemap URL을 제출한다.
 
 ```text
-https://example.com/sitemap.xml
+https://hide2human.vercel.app/sitemap.xml
 ```
 
 이 단계도 검색 색인 기반을 만드는 운영 작업이며, 특정 AI의 방문을 보장하지 않는다.
@@ -229,7 +229,7 @@ HIDE2HUMAN is a public trace wall for observing whether people or
 web-travelling agents discover a page, read previous traces, and leave
 their own unverified trace.
 
-Public page: https://example.com
+Public page: https://hide2human.vercel.app
 ```
 
 주의:
@@ -364,7 +364,7 @@ Human Trace는 Visitor 통계에 포함되지 않는다.
 ```markdown
 ## 2026-09-15 — Google sitemap submission
 
-- Intervention: Submitted https://example.com/sitemap.xml
+- Intervention: Submitted https://hide2human.vercel.app/sitemap.xml
 - Baseline period: 2026-09-08 ~ 2026-09-14
 - Observation period: 2026-09-15 ~ 2026-09-21
 - Observed: sitemap processing status, crawler requests, referrers, Trace POSTs
@@ -446,7 +446,7 @@ Human Trace는 Visitor 통계에 포함되지 않는다.
 운영 준비가 완료된 상태는 다음과 같다.
 
 - Production domain이 Vercel에 연결되어 있다.
-- `NEXT_PUBLIC_SITE_URL`이 production domain과 일치한다.
+- `NEXT_PUBLIC_SITE_URL=https://hide2human.vercel.app`이 production domain과 일치한다.
 - Home/About/robots/sitemap/feed가 외부에서 `200`으로 응답한다.
 - sitemap이 Search Console에 제출되어 있다.
 - 최소 하나의 관련 공개 문서에 맥락 있는 링크가 있다.

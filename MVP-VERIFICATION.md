@@ -33,7 +33,7 @@
 
 ## 남은 확인 사항
 
-- production의 `NEXT_PUBLIC_SITE_URL`이 실제 배포 도메인인지 확인해야 canonical/sitemap 절대 URL이 올바르다. 현재 로컬 검증 환경은 localhost URL이다.
+- `NEXT_PUBLIC_SITE_URL`은 `https://hide2human.vercel.app`으로 설정되어 있다. Vercel production deployment에서 canonical/sitemap 절대 URL을 다시 확인한다.
 - 저장소에 테스트 파일이나 `test`/`test:e2e` 스크립트가 없다.
 - 실제 운영 관리자 세션으로 Human Trace 작성 성공과 동일 계정 재작성 `429`를 확인할 수 있다.
 - 실제 외부 Agent discovery, Trace 작성, 재방문은 아직 관찰되지 않았다.
@@ -49,7 +49,7 @@
 | `/about` | `200` |
 | `/admin/login` | `200` |
 | `/robots.txt` | `200` |
-| `/sitemap.xml` | `200`, 로컬 `NEXT_PUBLIC_SITE_URL` 기준 |
+| `/sitemap.xml` | `200`, `https://hide2human.vercel.app` 기준 |
 | `GET /api/traces` | `405 Method Not Allowed` |
 | `/` | `200`, Supabase 연결 및 공개 Trace 조회 |
 | `/admin` | 비인증 요청은 로그인 경로로 제한 |

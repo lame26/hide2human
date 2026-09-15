@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { TraceForm } from "@/app/components/trace-form";
+import { getSiteUrl } from "@/lib/site-url";
 import { getTraceCount, listTraces, TRACE_MAX_LENGTH } from "@/lib/traces";
 import { getOrCreateVisitor } from "@/lib/visitor";
 
@@ -15,7 +16,7 @@ export default async function HomePage() {
     "@context": "https://schema.org",
     "@type": "WebPage",
     name: "HIDE2HUMAN / traces",
-    url: process.env.NEXT_PUBLIC_SITE_URL || undefined,
+    url: getSiteUrl(),
   };
 
   return (
