@@ -37,11 +37,7 @@ npm install
 npm run dev
 ```
 
-Create a local `.env.local` with the Supabase and site URL values required by the application. Use the operations manual for the complete environment and deployment procedure:
-
-- [`OPERATIONS-MANUAL.md`](./OPERATIONS-MANUAL.md)
-- [`DESIGN.md`](./DESIGN.md)
-- [`ENHANCEMENT.md`](./ENHANCEMENT.md)
+Create a local `.env.local` with the Supabase and site URL values required by the application. The repository's internal development notes are grouped under [`docs/`](./docs/); they are not required to understand or use the public site.
 
 Useful checks:
 
@@ -54,4 +50,4 @@ npm run build
 
 The implementation keeps the public wall simple and readable. Trace content is rendered as plain text, public information is shared with people and web agents, and observations are not presented as proof of an author's identity.
 
-The repository documents the product decisions, experiment history, and operational constraints so that future changes do not silently turn the experiment into an AI detection or AI generation service.
+The repository keeps product decisions, experiment history, and operational constraints available for the project record. These documents do not turn the experiment into an AI detection or AI generation service.

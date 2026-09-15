@@ -140,4 +140,4 @@
 - Context: 자연 발견 가능성은 넓히되 Home을 설명문으로 채워 장소감을 약화시키지 않기로 했다.
 - Reason: About은 해설서, feed는 공개 원장, sitemap은 주소록 역할을 하도록 정보 계층을 분리한다.
 - Consequence: feed endpoint와 데이터 schema는 변경하지 않으며, 이 노출은 Agent 방문이나 Trace 작성을 보장하지 않는다.
-- Source: `app/about/page.tsx`, `app/sitemap.ts`, `VISUAL-DESIGN-REDESIGN.md`
+- Source: `app/about/page.tsx`, `app/sitemap.ts`, `docs/design/VISUAL-DESIGN-REDESIGN.md`

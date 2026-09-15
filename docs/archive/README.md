@@ -8,4 +8,4 @@
 - `MVP-VERIFICATION.md`: MVP 구현 검증 보고서와 환경별 확인 기록
 - `P1-IMPLEMENTATION-BLOCKER.md`: Human Trace 정책 확정 전 중단 및 이후 해소 기록
 
-삭제하지 않고 보관하므로 과거 판단의 근거와 실험 이력을 추적할 수 있다. 현재 기준 문서는 루트의 `DESIGN.md`, `ENHANCEMENT.md`, `DECISIONS.md`, `OPERATIONS-MANUAL.md`, `EXPERIMENT_LOG.md`, `CHANGELOG.md`를 사용한다.
+삭제하지 않고 보관하므로 과거 판단의 근거와 실험 이력을 추적할 수 있다. 현재 기준 문서는 루트의 `DESIGN.md`, `ENHANCEMENT.md`, `DECISIONS.md`, `EXPERIMENT_LOG.md`, `CHANGELOG.md`를 사용하며, 운영 절차와 시각 설계 기록은 각각 `docs/operations/`와 `docs/design/`에 둔다.

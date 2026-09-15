@@ -29,7 +29,7 @@
 - `CHANGELOG.md`에 오늘의 구현과 운영 변경을 기록했다.
 - `DECISIONS.md`에 Human Trace 및 machine-readable 공개 정책을 기록했다.
 - `EXPERIMENT_LOG.md`에 discovery 실험 기준을 정리했다.
-- `OPERATIONS-MANUAL.md`를 작성했다.
+- `docs/operations/OPERATIONS-MANUAL.md`를 작성했다.
   - Vercel 환경변수
   - Search Console 등록
   - sitemap 제출
