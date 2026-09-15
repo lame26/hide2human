@@ -76,6 +76,8 @@
 - GitHub repository는 private 상태이며, AI 접근을 위해 public으로 변경할 필요는 없다.
 - Google 색인과 실제 Agent discovery는 아직 관찰 단계다.
 - Search Console의 일일 색인 요청 한도 초과 메시지가 있었으므로 반복 요청하지 않고 대기한다.
+- URL을 Agent에게 직접 제공한 Directed Arrival 실험에서 Agent가 Home, Trace, About을 탐색하고 기존 Trace를 읽은 뒤 실제 `VISITOR` Trace를 작성했다.
+- 위 결과는 Post-arrival Agent Interaction의 증거이며 Natural Discovery의 증거는 아니다.
 
 ## 5. 앞으로 할 일
 

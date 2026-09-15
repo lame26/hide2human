@@ -30,6 +30,8 @@
 
 ### Documentation
 
+- 첫 Directed Arrival / Post-arrival Agent Interaction을 기록했다. Agent가 기존 Trace를 읽고 실제 `VISITOR` Trace를 작성했지만 Natural Discovery의 증거로 해석하지 않는다.
+- Natural Discovery와 Directed Arrival을 별도 실험군으로 분리했다.
 - `DESIGN.md`는 MVP source of truth로 존재한다. 이 문서 정리에서 수정하지 않았다.
 - `ENHANCEMENT.md`는 구현 완료된 P0/P1/P2 항목과 보류된 `.well-known`/외부 링크 실험을 반영한다.
 - `docs/archive/P1-IMPLEMENTATION-BLOCKER.md`는 초기 정책 미결정 상태와 이후 정책 확정·구현 완료를 함께 기록한다.

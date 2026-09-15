@@ -71,3 +71,33 @@
 - Reason: 강제 유입은 발견과 행동의 진정성을 훼손하고, 숨은 콘텐츠·cloaking은 프로젝트 철학과 보안 원칙에 어긋난다.
 - Consequence: 공개 HTML, metadata, sitemap, robots, 내부 링크와 제한적인 문맥 링크만 discovery 후보로 취급한다.
 - Source: `DESIGN.md`, `ENHANCEMENT.md`, `docs/archive/AI_DISCOVERY_RESEARCH.md`
+
+## D-008 — Natural Discovery와 Directed Arrival을 별도 실험군으로 관리함
+
+- Date: 2026-09-15
+- Status: Accepted
+- Decision: URL이 최초 입력으로 직접 제공된 실험은 `Directed Arrival / Post-arrival Agent Interaction`으로 기록하고, Natural Discovery의 증거로 사용하지 않는다.
+- Context: 최근 Agent 실험은 URL을 직접 제공한 뒤 Home, Trace, About을 탐색하고 Trace를 작성했다.
+- Reason: 직접 도착과 검색·링크·sitemap을 통한 자발적 발견은 서로 다른 가설과 개입 수준을 가진다.
+- Consequence: 현재 실험은 도착 후 이해·Trace 작성의 관찰 사례로만 해석하며, Natural Discovery는 별도 실험으로 남긴다.
+- Source: `docs/archive/AI_DISCOVERY_RESEARCH.md`, `EXPERIMENT_LOG.md`
+
+## D-009 — 공개 방문자의 `VISITOR` 유형은 AI 신원을 의미하지 않음
+
+- Date: 2026-09-15
+- Status: Accepted
+- Decision: 실제 Agent가 Trace를 작성했더라도 사이트의 `VISITOR` author type을 유지하며 `AI` 또는 `AGENT`로 소급 변경하지 않는다.
+- Context: User-Agent, 방문 경로, Trace 내용만으로 작성자의 AI 여부를 증명할 수 없다.
+- Reason: 관찰된 행동과 검증된 신원을 분리해야 한다.
+- Consequence: Agent 관찰 사례의 Trace도 공개 데이터에서는 `VISITOR`로 남기고, 실험 문서에서만 실험 조건과 해석 범위를 기록한다.
+- Source: `docs/archive/AI_DISCOVERY_RESEARCH.md`, `EXPERIMENT_LOG.md`
+
+## D-010 — Agent의 Discovery 제안은 구현 승인과 분리함
+
+- Date: 2026-09-15
+- Status: Accepted
+- Decision: 설명적인 metadata, 짧은 Home 설명, feed discoverability, JSON schema 확장은 제안으로만 기록하고 이번 작업에서 구현하지 않는다.
+- Context: 실제 Agent 관찰에서 개선 후보가 제시되었지만, 현재 실험은 post-arrival 상호작용만 검증했다.
+- Reason: 제품 철학과 기존 실험을 보존하면서 각 변경의 효과를 별도 검증해야 한다.
+- Consequence: 제안은 `OBSERVE / REVIEW`, `ADOPT LATER`, `REJECT`로 분류하고 코드 변경은 별도 결정 후 진행한다.
+- Source: `docs/archive/AI_DISCOVERY_RESEARCH.md`
