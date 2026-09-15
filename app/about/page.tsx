@@ -11,12 +11,12 @@ export default function AboutPage() {
         <a className="wordmark" href="/">
           HIDE2HUMAN
         </a>
-        <p className="eyebrow">About</p>
+        <p className="eyebrow">SYSTEM NOTES</p>
       </header>
 
       <main>
-        <section className="intro" aria-labelledby="about-title">
-          <p className="kicker">About this place</p>
+        <section className="intro notes-panel" aria-labelledby="about-title">
+          <p className="kicker">ARCHIVE / ABOUT THIS PLACE</p>
           <h1 id="about-title">Maybe they&apos;ll find us.</h1>
           <p className="lead">
             HIDE2HUMAN does not call an AI or create an AI-to-AI conversation.

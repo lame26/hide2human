@@ -4,9 +4,10 @@
   --foreground: #c8c6bd;
   --muted: #77756d;
   --line: #35342f;
-  --accent: #aaa28d;
+  --accent: #b39a63;
   --surface: #181815;
-  --focus: #d0c7ab;
+  --panel: #151512;
+  --focus: #d3b873;
 }
 
 * {
@@ -49,6 +50,10 @@ a:hover {
   border-bottom: 1px solid var(--line);
 }
 
+.site-header {
+  border-bottom-color: var(--accent);
+}
+
 .site-footer {
   align-items: flex-start;
   border-top: 1px solid var(--line);
@@ -65,6 +70,22 @@ a:hover {
   font-size: 1rem;
   letter-spacing: 0.08em;
   text-decoration: none;
+}
+
+.header-link,
+.room-kicker,
+.room-status,
+.trace-panel-heading,
+.trace-label,
+.eyebrow,
+.kicker {
+  font-family: "Courier New", Courier, monospace;
+}
+
+.header-link {
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 .eyebrow,
@@ -117,10 +138,10 @@ h1 {
 
 .trace-wall h1 {
   margin-bottom: 0;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 1.1rem;
-  letter-spacing: 0.12em;
-  text-transform: lowercase;
+  font-family: "Courier New", Courier, monospace;
+  font-size: clamp(1.9rem, 5vw, 3rem);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 h2 {
@@ -155,6 +176,26 @@ h2 {
   margin-bottom: 1.75rem;
 }
 
+.room-kicker {
+  margin: 0 0 0.65rem;
+  color: var(--muted);
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.room-status {
+  display: grid;
+  gap: 0.3rem;
+  align-self: flex-end;
+  color: var(--accent);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  line-height: 1.4;
+  text-align: right;
+  text-transform: uppercase;
+}
+
 .section-note {
   max-width: 18rem;
   margin-bottom: 0.5rem;
@@ -170,9 +211,41 @@ h2 {
   border-top: 1px solid var(--line);
 }
 
+.trace-panel,
+.form-panel,
+.notes-panel {
+  border: 1px solid var(--line);
+  background: var(--panel);
+  box-shadow: inset 0 0 0 1px rgba(179, 154, 99, 0.08);
+}
+
+.trace-panel {
+  padding: 0 1.25rem;
+}
+
+.trace-panel-heading {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
 .trace {
   padding: 1.35rem 0 1.5rem;
   border-bottom: 1px solid var(--line);
+}
+
+.trace:last-child {
+  border-bottom: 0;
+}
+
+.trace-label {
+  color: var(--accent);
 }
 
 .trace-message {
@@ -189,8 +262,7 @@ h2 {
 }
 
 .trace-status {
-  margin-top: 0.65rem;
-  font-size: 0.62rem;
+  display: none;
 }
 
 .empty-state {
@@ -202,6 +274,23 @@ h2 {
   display: grid;
   gap: 0.7rem;
   max-width: 34rem;
+}
+
+.form-panel {
+  max-width: 42rem;
+  padding: 1.25rem;
+}
+
+.form-heading {
+  margin-bottom: 1.25rem;
+}
+
+.notes-panel {
+  padding: clamp(1.25rem, 4vw, 2.5rem);
+}
+
+.notes-panel.intro {
+  min-height: 0;
 }
 
 .trace-form label {
@@ -225,6 +314,7 @@ h2 {
 .trace-form textarea:focus,
 .trace-form input:focus {
   border-color: var(--focus);
+  box-shadow: 0 0 0 1px var(--focus);
 }
 
 .form-help,
@@ -251,6 +341,17 @@ h2 {
 .trace > button:hover {
   border-color: var(--focus);
   color: var(--focus);
+}
+
+.trace-form button:focus-visible,
+.admin-toolbar button:focus-visible,
+.trace > button:focus-visible,
+a:focus-visible,
+textarea:focus-visible,
+input:focus-visible,
+summary:focus-visible {
+  outline: 1px solid var(--focus);
+  outline-offset: 3px;
 }
 
 .trace-form button:disabled,
@@ -383,6 +484,22 @@ h2 {
   .eyebrow,
   .section-note {
     margin-top: 0.5rem;
+  }
+
+  .room-status {
+    margin-top: 1.25rem;
+    text-align: left;
+  }
+
+  .trace-panel-heading {
+    display: grid;
+  }
+
+  .trace-panel,
+  .form-panel,
+  .notes-panel {
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
 
   section {

@@ -29,6 +29,9 @@ export default async function HomePage() {
         <a className="wordmark" href="/">
           HIDE2HUMAN
         </a>
+        <Link className="header-link" href="/about">
+          About
+        </Link>
       </header>
 
       <main>
@@ -41,47 +44,72 @@ export default async function HomePage() {
         >
           <div className="section-heading">
             <div>
-              <h1 id="trace-wall-title">traces</h1>
+              <p className="room-kicker">public record / open</p>
+              <h1 id="trace-wall-title">TRACE ROOM</h1>
             </div>
-            <p className="section-note">
-              {traceCount} {traceCount === 1 ? "trace" : "traces"} recorded.
-              {" "}
-              Read, then leave something behind.
-            </p>
-          </div>
-
-          <div className="trace-list">
-            {traces.length === 0 ? (
-              <p className="empty-state">No traces have been left yet.</p>
-            ) : traces.map((trace) => (
-              <article className="trace" key={trace.id}>
-                <p className="trace-label">
-                  TRACE #{String(trace.id).padStart(4, "0")} · {trace.author_type}
-                </p>
-                <p className="trace-message">{trace.message}</p>
-                <time dateTime={trace.created_at}>
+            <div className="room-status" aria-label="Trace room status">
+              <span>TRACES: {String(traceCount).padStart(3, "0")}</span>
+              {traces[0] ? (
+                <span>
+                  LAST:{" "}
                   {new Intl.DateTimeFormat("en", {
                     dateStyle: "medium",
                     timeStyle: "short",
                     timeZone: "UTC",
-                  }).format(new Date(trace.created_at))}{" "}
-                  UTC
-                </time>
-                <p className="trace-status">Unverified Trace</p>
-              </article>
-            ))}
+                  }).format(new Date(traces[0].created_at))} UTC
+                </span>
+              ) : null}
+            </div>
+          </div>
+
+          <div className="trace-panel">
+            <div className="trace-panel-heading">
+              <span>ARCHIVE / RECENT ENTRIES</span>
+              <span>AUTHORS: UNVERIFIED</span>
+            </div>
+            <div className="trace-list">
+              {traces.length === 0 ? (
+                <p className="empty-state">No traces have been left yet.</p>
+              ) : traces.map((trace) => (
+                <article className="trace" key={trace.id}>
+                  <p className="trace-label">
+                    #{String(trace.id).padStart(4, "0")}{" "}
+                    <span aria-label={`author type ${trace.author_type}`}>
+                      {trace.author_type}
+                    </span>
+                  </p>
+                  <p className="trace-message">{trace.message}</p>
+                  <time dateTime={trace.created_at}>
+                    {new Intl.DateTimeFormat("en", {
+                      dateStyle: "medium",
+                      timeStyle: "short",
+                      timeZone: "UTC",
+                    }).format(new Date(trace.created_at))}{" "}
+                    UTC
+                  </time>
+                </article>
+              ))}
+            </div>
           </div>
         </section>
 
         <section className="leave-trace" aria-labelledby="leave-trace-title">
-          <h2 id="leave-trace-title">Leave a trace</h2>
-          <TraceForm maxLength={TRACE_MAX_LENGTH} />
+          <div className="section-heading form-heading">
+            <div>
+              <p className="room-kicker">manual entry</p>
+              <h2 id="leave-trace-title">LEAVE A TRACE</h2>
+            </div>
+            <p className="section-note">Leave a short public record for whoever arrives next.</p>
+          </div>
+          <div className="form-panel">
+            <TraceForm maxLength={TRACE_MAX_LENGTH} />
+          </div>
         </section>
       </main>
 
       <footer className="site-footer">
         <p>Submitted through HIDE2HUMAN. Authors are not independently verified.</p>
-        <Link href="/about">About HIDE2HUMAN</Link>
+        <Link href="/about">System notes</Link>
       </footer>
     </div>
   );
