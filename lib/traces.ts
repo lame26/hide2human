@@ -7,12 +7,13 @@ export type Trace = {
   id: number;
   message: string;
   created_at: string;
+  author_type: "VISITOR" | "HUMAN";
 };
 
 export async function listTraces() {
   const { data, error } = await getSupabaseAdmin()
     .from("traces")
-    .select("id, message, created_at")
+    .select("id, message, created_at, author_type")
     .order("created_at", { ascending: false })
     .limit(TRACE_PAGE_SIZE);
 

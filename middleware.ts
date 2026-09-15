@@ -2,10 +2,15 @@ import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 
 export async function middleware(request: NextRequest) {
-  const response = NextResponse.next({ request });
+  let visitorId = request.cookies.get("h2h_visitor")?.value;
+  let createdVisitor = false;
   if (!request.cookies.has("h2h_visitor")) {
-    const visitorId = crypto.randomUUID();
+    visitorId = crypto.randomUUID();
     request.cookies.set("h2h_visitor", visitorId);
+    createdVisitor = true;
+  }
+  const response = NextResponse.next({ request });
+  if (createdVisitor && visitorId) {
     response.cookies.set("h2h_visitor", visitorId, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
