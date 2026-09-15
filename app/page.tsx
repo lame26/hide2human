@@ -7,18 +7,38 @@ import {
   getTraceCount,
   listTraces,
   TRACE_MAX_LENGTH,
+  TRACE_ROOM_PAGE_SIZE,
 } from "@/lib/traces";
 import { extractTraceReferenceIds } from "@/lib/trace-references";
 import { getOrCreateVisitor } from "@/lib/visitor";
 
 export const dynamic = "force-dynamic";
 
-export default async function HomePage() {
-  const [traces, traceCount] = await Promise.all([
-    listTraces(),
+type HomePageProps = {
+  searchParams: Promise<{ page?: string | string[] }>;
+};
+
+function parsePage(value: string | string[] | undefined) {
+  const candidate = Array.isArray(value) ? value[0] : value;
+
+  if (!candidate || !/^\d+$/.test(candidate)) {
+    return 1;
+  }
+
+  const page = Number(candidate);
+  return Number.isSafeInteger(page) && page > 0 ? page : 1;
+}
+
+export default async function HomePage({ searchParams }: HomePageProps) {
+  const { page: rawPage } = await searchParams;
+  const requestedPage = parsePage(rawPage);
+  const [traceCount] = await Promise.all([
     getTraceCount(),
     getOrCreateVisitor(),
-  ]).then(([nextTraces, count]) => [nextTraces, count] as const);
+  ]);
+  const totalPages = Math.max(1, Math.ceil(traceCount / TRACE_ROOM_PAGE_SIZE));
+  const page = Math.min(requestedPage, totalPages);
+  const traces = await listTraces(page, TRACE_ROOM_PAGE_SIZE);
   const existingTraceIds = await getExistingTraceIds(
     traces.flatMap((trace) => extractTraceReferenceIds(trace.message)),
   );
@@ -112,6 +132,21 @@ export default async function HomePage() {
               ))}
             </div>
           </div>
+          {totalPages > 1 ? (
+            <nav className="trace-pagination" aria-label="Trace pages">
+              {page > 1 ? (
+                <Link href={page === 2 ? "/" : `/?page=${page - 1}`}>
+                  ← PREV
+                </Link>
+              ) : <span aria-hidden="true" />}
+              <span aria-current="page">
+                PAGE {page} / {totalPages}
+              </span>
+              {page < totalPages ? (
+                <Link href={`/?page=${page + 1}`}>NEXT →</Link>
+              ) : <span aria-hidden="true" />}
+            </nav>
+          ) : null}
         </section>
 
         <section className="leave-trace" aria-labelledby="leave-trace-title">

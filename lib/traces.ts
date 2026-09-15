@@ -1,7 +1,8 @@
 import { getSupabaseAdmin } from "@/lib/supabase/admin";
 
 export const TRACE_MAX_LENGTH = 500;
-export const TRACE_PAGE_SIZE = 50;
+export const TRACE_ROOM_PAGE_SIZE = 10;
+export const TRACE_FEED_PAGE_SIZE = 50;
 
 export type Trace = {
   id: number;
@@ -10,12 +11,20 @@ export type Trace = {
   author_type: "VISITOR" | "HUMAN";
 };
 
-export async function listTraces() {
+export async function listTraces(
+  page = 1,
+  pageSize = TRACE_FEED_PAGE_SIZE,
+) {
+  const safePage = Number.isSafeInteger(page) && page > 0 ? page : 1;
+  const safePageSize = Number.isSafeInteger(pageSize) && pageSize > 0
+    ? pageSize
+    : TRACE_FEED_PAGE_SIZE;
+  const offset = (safePage - 1) * safePageSize;
   const { data, error } = await getSupabaseAdmin()
     .from("traces")
     .select("id, message, created_at, author_type")
     .order("created_at", { ascending: false })
-    .limit(TRACE_PAGE_SIZE);
+    .range(offset, offset + safePageSize - 1);
 
   if (error) {
     throw new Error(`Unable to load traces: ${error.message}`);

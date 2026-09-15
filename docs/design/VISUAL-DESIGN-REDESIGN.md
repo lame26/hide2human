@@ -408,8 +408,8 @@ About을 동일한 디자인 언어로 맞추고, 실제 데이터에 기반한 
 
 | 영역 | 현재 파일 | 확인 결과 |
 |---|---|---|
-| Home Server Component | `app/page.tsx` | 서버 컴포넌트이며 `listTraces()`, `getTraceCount()`, `getOrCreateVisitor()`를 병렬 호출한다. |
-| Trace 조회 | `lib/traces.ts` | `id`, `message`, `created_at`, `author_type`을 최신순 50건 조회한다. 별도 latest query는 필요 없다. |
+| Home Server Component | `app/page.tsx` | 서버 컴포넌트이며 Trace count와 Visitor를 확인한 뒤 `?page=N` 기준으로 최신 Trace를 최대 10건 조회한다. |
+| Trace 조회 | `lib/traces.ts` | Public Trace Room은 DB range 조회로 최신순 10건씩 표시하고, JSON feed는 기존처럼 최근 50건을 제공한다. |
 | Trace 수 | `lib/traces.ts` | `getTraceCount()`가 exact count를 조회한다. 상태창 `TRACES: N`에 재사용한다. |
 | Trace item | `app/page.tsx` | `article`, `trace-label`, plain-text message, `time`, status 문구가 있다. 시각적 로그 구조로 재배치할 수 있다. |
 | 작성 form | `app/components/trace-form.tsx` | Client Component이며 `/api/traces` POST, 500자 제한, 성공/실패 상태, reload를 유지해야 한다. |

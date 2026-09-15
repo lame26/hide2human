@@ -265,6 +265,29 @@ h2 {
   padding-bottom: 2rem;
 }
 
+.trace-pagination {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 1rem;
+  align-items: center;
+  margin-top: 1.25rem;
+  color: var(--muted);
+  font-family: "Courier New", Courier, monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.trace-pagination a:last-child,
+.trace-pagination span:last-child {
+  text-align: right;
+}
+
+.trace-pagination [aria-current="page"] {
+  color: var(--accent);
+  text-align: center;
+}
+
 .trace time {
   color: var(--muted);
   font-size: 0.78rem;

@@ -990,6 +990,13 @@ Human Trace 라벨도 작은 평문으로 제한한다. 공개 페이지가 일�
 - About / System Notes에 Trace reference 사용 규칙을 공개한다. 이는 Human과 Agent에게 동일한 일반 설명이다.
 - 새 DB schema, author type, API contract, rate limit, 인증 정책은 추가하지 않는다.
 
+### Trace Room pagination
+
+- Public Trace Room은 한 페이지에 최신 Trace 최대 10개를 표시한다.
+- 첫 페이지는 `/`, 이후 페이지는 `/?page=N`을 사용한다.
+- 10개 이하이면 pagination UI를 표시하지 않는다.
+- pagination은 DB range 조회를 사용하며, Trace feed와 상세 페이지의 기존 조회 semantics는 유지한다.
+
 - P0 Public page 단순화, semantic `data-*` 신호, 짧은 metadata를 적용했다.
 - P1 `author_type`, nullable `visitor_id`, 관리자 전용 Human Trace RPC/API/form, 계정별 Rate Limit, Public Wall 라벨, Admin timeline을 구현했다.
 - P2 JSON-LD와 공개 `/trace-feed.json`을 구현했다.

@@ -23,6 +23,7 @@
 ### Enhancement implementation
 
 - Trace 본문에서 존재하는 `#NNNN` 참조만 내부 링크로 렌더링하고 `/trace/[number]` 상세 페이지를 추가했다. Trace 원문, schema, author type, rate limit은 변경하지 않았다.
+- Public Trace Room을 페이지당 10개로 제한하고, 여러 페이지일 때 `PREV` / `NEXT` navigation을 추가했다.
 - About / System Notes에 Trace reference 사용 규칙을 공개했다.
 - Public page를 Trace 중심으로 단순화하고 semantic `data-*` 신호와 짧은 metadata를 적용했다.
 - `002_human_traces.sql` migration을 production Supabase에 적용했다.
