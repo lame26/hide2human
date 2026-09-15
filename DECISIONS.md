@@ -70,4 +70,4 @@
 - Context: HIDE2HUMAN은 공개 웹을 탐색하던 Agent의 organic discovery와 자발적 행동을 관찰한다.
 - Reason: 강제 유입은 발견과 행동의 진정성을 훼손하고, 숨은 콘텐츠·cloaking은 프로젝트 철학과 보안 원칙에 어긋난다.
 - Consequence: 공개 HTML, metadata, sitemap, robots, 내부 링크와 제한적인 문맥 링크만 discovery 후보로 취급한다.
-- Source: `DESIGN.md`, `ENHANCEMENT.md`, `AI_DISCOVERY_RESEARCH.md`
+- Source: `DESIGN.md`, `ENHANCEMENT.md`, `docs/archive/AI_DISCOVERY_RESEARCH.md`
