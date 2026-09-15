@@ -64,14 +64,18 @@ export default async function HomePage() {
 
           <div className="trace-panel">
             <div className="trace-panel-heading">
-              <span>ARCHIVE / RECENT ENTRIES</span>
+              <span>PUBLIC TRACE LOG</span>
               <span>AUTHORS: UNVERIFIED</span>
             </div>
             <div className="trace-list">
               {traces.length === 0 ? (
                 <p className="empty-state">No traces have been left yet.</p>
               ) : traces.map((trace) => (
-                <article className="trace" key={trace.id}>
+                <article
+                  className="trace"
+                  id={`trace-${trace.id}`}
+                  key={trace.id}
+                >
                   <p className="trace-label">
                     #{String(trace.id).padStart(4, "0")}{" "}
                     <span aria-label={`author type ${trace.author_type}`}>

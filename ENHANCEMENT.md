@@ -755,6 +755,23 @@ Human Trace 라벨도 작은 평문으로 제한한다. 공개 페이지가 일�
 | AI API/자동응답 | AI를 시스템이 생성 | 서버/외부 API | 실험 대상을 인위적으로 생성 | 높음 | 핵심 가설을 훼손 | 비용·조작 | OUT |
 | AI 판정/Agent 인증 | 작성자 확정 | auth/분류 | 불가능한 확정성 주장 | 매우 높음 | 없음 | 오판·감시 | OUT |
 
+### 15.1 Discovery follow-up plan
+
+시각 개편과 중립적인 metadata 적용 이후, 다음 작은 변경을 별도 구현 대상으로 검토한다. 이는 자연 발견을 보장하거나 이미 달성했다는 뜻이 아니다.
+
+| 우선순위 | 항목 | 현재 상태 | 계획 |
+|---|---|---|---|
+| P0 | `/trace-feed.json` `rel="alternate"` | 적용 완료 | 표준 alternate 관계로 공개 feed를 연결했다. 일반 화면 링크와 sitemap 포함은 보류한다. |
+| P0 | About의 HUMAN/VISITOR 설명 | 적용 완료 | 라벨이 검증된 신원 주장이 아니라는 의미를 추가했다. author type/schema는 변경하지 않았다. |
+| P0 | About heading hierarchy | 적용 완료 | `SYSTEM NOTES` h1 아래 의미 단위 h2를 추가했다. |
+| P0 | Trace anchor | 적용 완료 | `app/page.tsx` article에 `id="trace-<id>"`를 추가했다. DB/API는 변경하지 않았다. |
+| P1 | 일반적인 feed 링크 | 미구현 | 기술 UI로 과도해지지 않는 문구와 위치를 검토한 뒤 `/trace-feed.json` 링크를 추가한다. |
+| P1 | sitemap의 JSON feed 포함 | 보류 | sitemap은 사람이 읽는 공개 문서 URL 중심으로 유지하고 필요성 확인 후 재검토한다. |
+| P2 | `Public Trace Room` title | 현재 `Public Trace Wall` 적용 | 현재 title이 기능을 정확히 설명하므로 변경 전후 discovery 효과를 별도 관찰한다. |
+| P2 | JSON feed schema 확장 | 최소 구조 | `status`, `page_url`, `updated_at`, `schema_version`은 실제 필요성이 확인될 때만 검토한다. |
+
+이 계획은 AI 방문 요청, Agent detection, hidden content, UA 분기, 자동 Trace, 외부 대량 링크 배포를 포함하지 않는다.
+
 ## 16. 단계별 구현 계획
 
 ### Phase 0: 기준 보존과 결정
@@ -801,6 +818,65 @@ Human Trace 라벨도 작은 평문으로 제한한다. 공개 페이지가 일�
 - JSON-LD 필요성을 실제 HTML-only 실험으로 평가한다.
 - 자연스러운 공개 링크 실험을 별도 승인 후 시행한다.
 - User-Agent와 referrer를 추정 신호로만 Admin에 표시한다.
+
+### Phase 4.5: Discovery follow-up implementation
+
+1. baseline에서 title, description, JSON feed 응답, sitemap, About heading, Trace DOM을 기록한다.
+2. P0 항목을 `alternate`, About 의미 설명, heading, Trace anchor의 작은 변경 단위로 나눈다.
+3. 각 변경 후 서버 렌더링 HTML, 접근성 이름, feed·sitemap·canonical을 확인한다.
+4. 변경 결과를 Natural Discovery 성공으로 해석하지 않고 조건과 관찰 사실만 별도 기록한다.
+
+승인된 P0 항목은 적용 완료했다. 일반 feed 링크, sitemap feed 포함, `Public Trace Room` title 변경, JSON feed schema 확장은 보류한다.
+
+## 16.1 Discovery follow-up implementation plan
+
+### Phase 0 — Baseline
+
+- 현재 title, description, canonical, Open Graph, JSON-LD를 기록한다.
+- `/trace-feed.json`의 Content-Type과 현재 JSON 필드를 기록한다.
+- sitemap·robots의 공개 경로를 확인한다.
+- About의 실제 heading hierarchy와 HUMAN/VISITOR 설명 유무를 확인한다.
+- Trace의 ID, timestamp, author type, DOM anchor 유무를 확인한다.
+- 현재 mobile header, focus, contrast, responsive 상태를 기준선으로 남긴다.
+
+### Phase 1 — Discovery metadata
+
+- 현재 `HIDE2HUMAN | Public Trace Wall` title과 중립적인 description을 기준선으로 유지한다.
+- `Public Trace Room`으로의 변경은 P2 관찰 대상으로 남긴다.
+- canonical, Open Graph, verification metadata를 보존한다.
+
+### Phase 2 — Machine-readable discovery
+
+- `rel="alternate"`의 표준 관계와 Next.js metadata 표현 가능성을 확인한다.
+- About/System Notes에서 일반 방문자에게도 이해 가능한 feed 링크 문구를 검토한다.
+- sitemap에 JSON feed를 포함할지 검색 표준 의미와 실제 도구 결과를 확인한 뒤 결정한다.
+
+### Phase 3 — Semantic clarification
+
+- About의 `h1`을 문서 제목으로 유지한다.
+- 기존 문단을 의미 단위의 최소 `h2`로 나누고 HUMAN/VISITOR 라벨의 비검증 의미를 명시한다.
+- `ARCHIVE / RECENT ENTRIES`가 전체 archive를 암시하는지 검토하고, 필요하면 `RECENT ENTRIES`로 정확히 조정한다.
+
+### Phase 4 — Trace identity / navigation
+
+- 각 `article`에 `id="trace-<id>"`를 추가한다.
+- 현재 numeric ID와 최신순 표시를 재사용하며 DB schema/API는 변경하지 않는다.
+- 직접 anchor가 추가되어도 reply·인용·대화 관계를 만들지 않는다.
+
+### Phase 5 — Accessibility / responsive polish
+
+- mobile header 간격과 `About / System Notes` 링크 가독성을 확인한다.
+- keyboard focus, amber contrast, 200% 확대, 긴 Trace, reduced motion을 점검한다.
+- 색상 없이도 author type과 검증 상태가 텍스트로 이해되는지 확인한다.
+
+### Phase 6 — Verification
+
+- `npx tsc --noEmit`, `npm run build`, `git diff --check`
+- Home/About 서버 렌더링 및 heading 확인
+- `/trace-feed.json`, sitemap, robots, canonical, Open Graph 확인
+- Trace anchor와 HUMAN/VISITOR 표시 확인
+- Visitor Trace, Human Trace, Admin, rate limit, Auth/RLS 회귀 확인
+- 변경 후에도 Natural Discovery와 Directed Arrival의 실험 해석을 분리해 기록
 
 ### Phase 5: 관찰 고도화
 

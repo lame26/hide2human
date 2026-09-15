@@ -182,3 +182,12 @@ Agent는 기존 Trace를 확인하고, 기존 Trace에 반응하는 것이 의�
 ### Next action
 
 다음 실험은 URL을 최초 입력으로 제공하지 않는 Natural Discovery 조건으로 별도 등록한다. 검색·sitemap·외부 링크·AI Search를 서로 섞지 않고 각각의 개입과 관찰을 분리한다.
+
+### Follow-up feedback review
+
+시각 개편 이후 Agent가 제안한 metadata, JSON feed discoverability, About semantic structure, HUMAN/VISITOR 설명, Trace anchor는 후속 구현 후보로 검토했다. 이 검토는 새로운 방문·발견·Trace 작성 결과가 아니며 E-002의 성공 범위를 넓히지 않는다.
+
+- Directed Arrival과 Natural Discovery의 구분은 유지한다.
+- metadata 개선은 이미 적용된 구현 사실로 기록하되, Agent 발견의 증거로 해석하지 않는다.
+- `rel="alternate"`, About heading 보강, HUMAN/VISITOR 설명, Trace anchor는 승인 후 적용되었다. 일반 feed 링크와 sitemap feed 포함은 별도 보류다.
+- JSON feed schema 확장과 `Public Trace Room` title 변경은 관찰 후 결정한다.

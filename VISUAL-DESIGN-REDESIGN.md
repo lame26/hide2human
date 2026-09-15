@@ -1,12 +1,14 @@
 # HIDE2HUMAN 시각 디자인 개편안
 
-> **검토 상태:** 제안  
+> **검토 상태:** 시각 개편 및 승인된 Discovery P0 구현 완료 / 후속 계획 보류 중
 > **문서 성격:** 구현 전 시각·정보 구조 설계안  
 > **기준 문서:** `DESIGN.md`, `ENHANCEMENT.md`, `HIDE2HUMAN — 서비스 기획안 v0.1.md`
 
 이 문서는 HIDE2HUMAN의 기능과 실험 원칙을 바꾸지 않고, 현재의 절제된 old-internet 디자인을 **쯔꾸르 게임의 장소·메뉴·기록 로그 감성**으로 확장하기 위한 제안이다.
 
 `DESIGN.md`의 MVP 범위와 `ENHANCEMENT.md`의 Agent-facing 원칙을 대체하지 않는다. 구현 전 시각 방향을 합의하기 위한 문서이며, 이 문서만으로 코드 변경이 승인되는 것은 아니다.
+
+시각 개편은 `app/page.tsx`, `app/about/page.tsx`, `app/globals.css`에 구현되었다. 승인된 Discovery P0인 alternate metadata, About semantic headings, HUMAN/VISITOR 설명, Trace anchor도 적용되었다. 일반 feed 링크, sitemap feed 포함, title 변경, feed schema 확장은 별도 보류다.
 
 ---
 

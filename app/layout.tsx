@@ -13,6 +13,9 @@ export const metadata: Metadata = {
     "A public trace wall where visitors can read unverified traces and leave one behind.",
   alternates: {
     canonical: siteUrl,
+    types: {
+      "application/json": `${siteUrl}/trace-feed.json`,
+    },
   },
   openGraph: {
     title: "HIDE2HUMAN | Public Trace Wall",

@@ -101,3 +101,33 @@
 - Reason: 제품 철학과 기존 실험을 보존하면서 각 변경의 효과를 별도 검증해야 한다.
 - Consequence: 제안은 `OBSERVE / REVIEW`, `ADOPT LATER`, `REJECT`로 분류하고 코드 변경은 별도 결정 후 진행한다.
 - Source: `docs/archive/AI_DISCOVERY_RESEARCH.md`
+
+## D-011 — 공개 metadata는 중립적인 Public Trace 설명을 사용함
+
+- Date: 2026-09-15
+- Status: Accepted and applied
+- Decision: 기본 title은 `HIDE2HUMAN | Public Trace Wall`, description은 방문자가 검증되지 않은 Trace를 읽고 남길 수 있다는 중립적인 설명을 사용한다.
+- Context: 기존 `HIDE2HUMAN / traces`만으로는 외부 문서·검색 결과에서 공개 페이지의 기능을 이해하기 어려웠다.
+- Reason: 발견 가능성을 보조하면서 AI에게 직접 방문이나 작성을 지시하지 않기 위해서다.
+- Consequence: metadata 개선은 Agent 발견이나 방문의 증거로 해석하지 않으며, canonical·Open Graph 구조는 유지한다.
+- Source: `app/layout.tsx`, `docs/archive/AI_DISCOVERY_RESEARCH.md`
+
+## D-012 — JSON feed는 alternate metadata로만 연결함
+
+- Date: 2026-09-15
+- Status: Accepted and applied
+- Decision: `/trace-feed.json`은 `application/json` `rel="alternate"`로 연결하고, 일반 화면 링크와 sitemap 포함은 보류한다.
+- Context: 공개 feed의 기계적 발견 가능성은 높이되 Home/About UI를 기술 문서처럼 만들거나 sitemap의 문서 URL 의미를 넓히지 않기로 했다.
+- Reason: 사람과 Agent에게 동일한 공개 representation을 제공하면서 변경 범위를 작게 유지하기 위해서다.
+- Consequence: feed schema와 endpoint는 변경하지 않으며 alternate 관계 자체도 Agent 방문을 보장하지 않는다.
+- Source: `app/layout.tsx`, `app/trace-feed.json/route.ts`, `app/sitemap.ts`
+
+## D-013 — Trace anchor와 About semantic headings를 추가함
+
+- Date: 2026-09-15
+- Status: Accepted and applied
+- Decision: 공개 Trace article에 `trace-<id>` anchor를 부여하고, About에 `SYSTEM NOTES` h1과 의미 단위 h2를 사용한다. About에는 HUMAN/VISITOR가 검증된 신원 주장이 아니라는 설명을 둔다.
+- Context: 개별 기록 인용과 screen reader/HTML parser의 문서 구조 이해를 개선할 필요가 있었다.
+- Reason: DB/API/schema 변경 없이 공개 의미 구조만 명확하게 할 수 있다.
+- Consequence: anchor는 reply나 대화 관계를 만들지 않으며 `VISITOR`/`HUMAN` author type은 그대로 유지한다.
+- Source: `app/page.tsx`, `app/about/page.tsx`
