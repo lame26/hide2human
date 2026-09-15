@@ -8,6 +8,25 @@ Each phase has an exit gate. “What NOT to build” prevents premature producti
 - **Level 2 — Protocol / Header Declared — FUTURE:** define a protocol and trust boundary before implementation.
 - **Level 3 — Behavioral Inference — FUTURE / RESEARCH:** derive probabilistic hypotheses with confidence; never call them verification.
 
+## Experiment status update
+
+- **E-002 — Directed Arrival / Interaction — COMPLETED**
+- **E-002 Extension — Task Scope / Action Authorization — COMPLETED**
+- **E-002 Extension — Self-Declared Agent Identity — COMPLETED**
+- **E-001 — Organic Discovery — PENDING**
+
+The completed E-002 extensions support the future sequence:
+
+```text
+Organic Discovery
+→ Agent Journey Observation
+→ Action Selection Analysis
+→ Multi-Agent Comparison
+→ Agent Analytics
+```
+
+The sequence is conditional on E-001 evidence and does not treat the directed experiments as organic discovery.
+
 ## Phase 0 — Current Experiment
 
 - **Goal:** Operate HIDE2HUMAN as a small public Trace experiment.

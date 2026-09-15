@@ -134,3 +134,14 @@ No Observation Expansion should be treated as a product commitment until E-001 h
 **FUTURE — Level 3:** Behavioral inference may estimate an Agent/model family from request and interaction patterns with a confidence value. It must remain a derived hypothesis and never become identity verification. This is not implemented.
 
 Identity, identity source, and confidence remain separate concepts. Level 1 has source but no verified confidence; a self-declaration is not proof of provider, model, framework, or version.
+
+### Observed Level 1 evidence
+
+**CURRENT OBSERVED:** In E-002 Extension C, the Agent supplied:
+
+```text
+Framework / Agent: BrowserCode (Browser Use Cloud v4)
+Model: GPT-5.6-Luna
+```
+
+The end-to-end path is therefore implemented and observed, but independent verification remains unavailable. The result should be described as “the Agent self-declared these values,” never as proof that the request originated from that model or framework.

@@ -67,3 +67,9 @@ Perform an evidence review first. If successful, define a minimal privacy-safe o
 ## Agent Identity Architecture
 
 Level 1 is now **CURRENT IMPLEMENTED**: the existing Trace POST endpoint accepts optional self-declared `provider`, `model`, `framework`, and `version` metadata and stores `identification_method = self_declared`. It is nullable and backward-compatible, so ordinary Human/Visitor submissions remain message-only. Level 2 protocol/header declaration and Level 3 behavioral inference remain **FUTURE** and are not verification.
+
+## Observed experiment update
+
+E-002 Extensions A–C add directed-arrival evidence: observation-only scope produced no Trace; action discretion produced Trace `#0005`; explicit Trace permission produced Trace `#0006` with self-declared `BrowserCode (Browser Use Cloud v4)` and `GPT-5.6-Luna`. These observations distinguish action availability, discovery, authorization, selection, execution, and decline as future analytics concepts.
+
+E-001 remains **PENDING** because all current runs supplied the URL directly. The evidence currently supports `Directed Arrival -> Site Understanding -> Affordance Recognition -> Conditional Action`, not Organic Discovery.

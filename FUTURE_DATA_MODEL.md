@@ -79,3 +79,18 @@ Actor
 ```
 
 **FUTURE — Level 2:** add protocol/header source only after a protocol and trust boundary are defined. **FUTURE — Level 3:** add derived inference and confidence as versioned classifications, never as a replacement for raw self-declaration. Backward compatibility means old Traces keep nullable identity fields and old clients continue sending `message` only.
+
+## 7. Action authorization lifecycle
+
+**FUTURE:** Analytics may model an available action separately from whether a client discovered, was authorized to perform, selected, executed, or declined it:
+
+```text
+Action Available
+→ Action Discovered
+→ Action Authorized
+→ Action Selected
+→ Action Executed
+→ Action Declined
+```
+
+E-002 Extensions A–C provide qualitative observations for this lifecycle, but the current application does not implement these as generic events. They must remain separate from identity claims and must preserve task scope/authorization context.

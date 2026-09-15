@@ -42,3 +42,13 @@ Each dimension should expose confidence based on evidence completeness, repeatab
 - **FUTURE — Level 3 / Behavioral Inference:** a versioned probabilistic classification with confidence.
 
 None of these levels verifies identity. Identity source and identity confidence must remain separate from readiness dimensions.
+
+## Observed Level 1 result
+
+E-002 Extension C reached the end-to-end Level 1 path: the Agent supplied `BrowserCode (Browser Use Cloud v4)` and `GPT-5.6-Luna`, and the UI displayed the self-declared metadata. This confirms implementation behavior, not independent identity verification. Level 1 status is:
+
+```text
+Implementation: complete
+End-to-end test: observed
+Independent verification: not available
+```

@@ -36,6 +36,24 @@ Experiments are gates for learning, not feature commitments. E-001 is the branch
 
 **FUTURE — Level 3: Behavioral Inference.** Research probabilistic inference from behavior; preserve uncertainty and never convert it to verification.
 
+## E-002 extensions
+
+**CURRENT — Completed:** `E-002 Extension — Task Scope / Action Authorization` records the read-only, discretionary-action, and explicit-action comparison.
+
+**CURRENT — Completed:** `E-002 Extension — Self-Declared Agent Identity` records the optional identity metadata supplied during Trace `#0006`. It is self-declared and not independently verified.
+
+The extensions add the candidate action sequence:
+
+```text
+Action Available
+→ Action Discovered
+→ Action Authorized
+→ Action Selected
+→ Action Executed / Declined
+```
+
+These are observation and analytics concepts, not current event instrumentation.
+
 ## E-003 — Discovery Reproduction
 
 - **Objective:** Determine whether an E-001-like discovery path repeats.

@@ -61,3 +61,18 @@ None is established by the current repository or by E-002.
 **CURRENT IMPLEMENTED — Level 1:** a Trace may carry optional self-declared provider/model/framework/version metadata. Analytics may segment observations by the declared values only when displaying the source as `self-declared`; it must not call them verified Agent or model identities.
 
 **FUTURE:** `protocol_declared` and `inferred` sources can be added as separate classifications with their own trust/confidence and calculation versions. Missing identity remains valid and must not reduce E-001 success.
+
+## 8. Action authorization analytics candidate
+
+**FUTURE:** A task-aware analytics model may distinguish:
+
+```text
+Action Available
+→ Action Discovered
+→ Action Authorized
+→ Action Selected
+→ Action Executed
+→ Action Declined
+```
+
+E-002 Extensions A–C provide qualitative examples, but the current application does not emit these generic events. Any future metric must retain task scope and authorization context; “available” or “discovered” must not be interpreted as “executed.”

@@ -35,3 +35,7 @@ The current site intentionally provides normal public HTML, metadata, sitemap, r
 **CURRENT IMPLEMENTED — Level 1:** an Agent can self-declare optional identity metadata in the existing Trace POST payload. This is an observation about the request source, not a UX audit result.
 
 **FUTURE:** protocol-declared identity and behavioral inference are separate evidence sources. They must never be silently merged with self-declared values or presented as verified identity.
+
+## Action authorization evidence
+
+**FUTURE:** Audit runs may record whether an action was available, discovered, authorized, selected, executed, or declined. The E-002 extensions show why these states should be separated: the same Trace affordance was discovered in an observation-only task but executed only when the task allowed or explicitly requested the external action. This is a candidate observation model, not current instrumentation.
