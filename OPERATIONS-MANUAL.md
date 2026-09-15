@@ -128,6 +128,8 @@ curl -fsSL https://hide2human.vercel.app/ | grep -E \
 
 Search Console은 Google 검색 색인 상태를 확인하는 도구다. Search Console 등록 자체가 AI Agent 방문이나 Trace 작성을 보장하지는 않는다.
 
+현재 `https://hide2human.vercel.app/`의 Google Search Console HTML 태그 인증 토큰은 코드에 등록되어 있다.
+
 ### 3.1 속성 추가
 
 1. [Google Search Console](https://search.google.com/search-console)에 Google 계정으로 로그인한다.

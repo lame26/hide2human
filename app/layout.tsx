@@ -19,6 +19,9 @@ export const metadata: Metadata = {
     type: "website",
     url: siteUrl,
   },
+  verification: {
+    google: "pvwkDtaPnN8loPPC-VA-BizPJeBx5HJKb-IzJzj2A_s",
+  },
 };
 
 export const viewport: Viewport = {
