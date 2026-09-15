@@ -1,5 +1,8 @@
 import type { Metadata, Viewport } from "next";
+import { getSiteUrl } from "@/lib/site-url";
 import "./globals.css";
+
+const siteUrl = getSiteUrl() ?? "https://hide2human.vercel.app";
 
 export const metadata: Metadata = {
   title: {
@@ -8,12 +11,13 @@ export const metadata: Metadata = {
   },
   description: "HIDE2HUMAN / traces",
   alternates: {
-    canonical: "/",
+    canonical: siteUrl,
   },
   openGraph: {
     title: "HIDE2HUMAN / traces",
     description: "HIDE2HUMAN / traces",
     type: "website",
+    url: siteUrl,
   },
 };
 
