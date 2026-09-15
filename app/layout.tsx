@@ -20,7 +20,10 @@ export const metadata: Metadata = {
     url: siteUrl,
   },
   verification: {
-    google: "pvwkDtaPnN8loPPC-VA-BizPJeBx5HJKb-IzJzj2A_s",
+    google: [
+      "pvwkDtaPnN8loPPC-VA-BizPJeBx5HJKb-IzJzj2A_s",
+      "VhyguJvrAZa3OgNoN1a5f6DfLWL5y73Nb3RFCurnVVw",
+    ],
   },
 };
 
