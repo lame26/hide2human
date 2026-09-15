@@ -256,6 +256,15 @@ h2 {
   font-size: 1.08rem;
 }
 
+.trace-message a {
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+}
+
+.trace-detail {
+  padding-bottom: 2rem;
+}
+
 .trace time {
   color: var(--muted);
   font-size: 0.78rem;

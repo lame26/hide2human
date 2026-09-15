@@ -110,6 +110,16 @@ Later Revisit
 
 ---
 
+## Trace navigation intervention
+
+Trace reference links and individual `/trace/NNNN` pages are an implementation intervention, not an experiment result. They make it possible to observe a future sequence such as:
+
+```text
+Trace A → referenced Trace B → later Trace C
+```
+
+No Agent followed a Trace reference as part of this implementation, so no discovery, reading, or behavior claim is recorded here.
+
 ## E-002 — Directed Arrival / Post-arrival Agent Interaction #001
 
 ### Hypothesis

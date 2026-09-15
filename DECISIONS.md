@@ -141,3 +141,13 @@
 - Reason: About은 해설서, feed는 공개 원장, sitemap은 주소록 역할을 하도록 정보 계층을 분리한다.
 - Consequence: feed endpoint와 데이터 schema는 변경하지 않으며, 이 노출은 Agent 방문이나 Trace 작성을 보장하지 않는다.
 - Source: `app/about/page.tsx`, `app/sitemap.ts`, `docs/design/VISUAL-DESIGN-REDESIGN.md`
+
+## D-015 — Trace reference는 렌더링 시점의 내부 하이퍼링크임
+
+- Date: 2026-09-15
+- Status: Accepted and applied
+- Decision: 본문 속 독립된 `#NNNN` 패턴은 실제 Trace가 존재할 때만 `/trace/NNNN`으로 링크한다. 원문은 그대로 저장하고 reference 관계를 DB에 저장하지 않는다.
+- Context: 기존 기록 사이를 탐색할 수 있게 하되 댓글·답글 시스템으로 확장하지 않기로 했다.
+- Reason: 기존 schema와 작성 흐름을 보존하면서 사람과 Agent에게 동일한 일반 HTML 링크를 제공할 수 있다.
+- Consequence: 존재하지 않는 번호·일반 hashtag·경계가 불명확한 숫자 조합은 링크가 되지 않으며, 상세 페이지는 없는 Trace에 404를 반환한다.
+- Source: `lib/trace-references.ts`, `app/components/trace-message.tsx`, `app/trace/[number]/page.tsx`

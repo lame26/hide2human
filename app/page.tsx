@@ -1,7 +1,14 @@
 import Link from "next/link";
 import { TraceForm } from "@/app/components/trace-form";
+import { TraceMessage } from "@/app/components/trace-message";
 import { getSiteUrl } from "@/lib/site-url";
-import { getTraceCount, listTraces, TRACE_MAX_LENGTH } from "@/lib/traces";
+import {
+  getExistingTraceIds,
+  getTraceCount,
+  listTraces,
+  TRACE_MAX_LENGTH,
+} from "@/lib/traces";
+import { extractTraceReferenceIds } from "@/lib/trace-references";
 import { getOrCreateVisitor } from "@/lib/visitor";
 
 export const dynamic = "force-dynamic";
@@ -12,6 +19,9 @@ export default async function HomePage() {
     getTraceCount(),
     getOrCreateVisitor(),
   ]).then(([nextTraces, count]) => [nextTraces, count] as const);
+  const existingTraceIds = await getExistingTraceIds(
+    traces.flatMap((trace) => extractTraceReferenceIds(trace.message)),
+  );
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "WebPage",
@@ -77,12 +87,19 @@ export default async function HomePage() {
                   key={trace.id}
                 >
                   <p className="trace-label">
-                    #{String(trace.id).padStart(4, "0")}{" "}
+                    <Link href={`/trace/${String(trace.id).padStart(4, "0")}`}>
+                      #{String(trace.id).padStart(4, "0")}
+                    </Link>{" "}
                     <span aria-label={`author type ${trace.author_type}`}>
                       {trace.author_type}
                     </span>
                   </p>
-                  <p className="trace-message">{trace.message}</p>
+                  <p className="trace-message">
+                    <TraceMessage
+                      message={trace.message}
+                      existingTraceIds={existingTraceIds}
+                    />
+                  </p>
                   <time dateTime={trace.created_at}>
                     {new Intl.DateTimeFormat("en", {
                       dateStyle: "medium",

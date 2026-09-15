@@ -22,6 +22,7 @@
 
 ### Enhancement implementation
 
+- Trace 본문에서 존재하는 `#NNNN` 참조만 내부 링크로 렌더링하고 `/trace/[number]` 상세 페이지를 추가했다. Trace 원문, schema, author type, rate limit은 변경하지 않았다.
 - Public page를 Trace 중심으로 단순화하고 semantic `data-*` 신호와 짧은 metadata를 적용했다.
 - `002_human_traces.sql` migration을 production Supabase에 적용했다.
 - `VISITOR`/`HUMAN` author type, nullable Human `visitor_id`, 관리자 Auth 연결, 관리자 계정별 1시간 Human Trace rate limit을 추가했다.

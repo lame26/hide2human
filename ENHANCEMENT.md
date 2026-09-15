@@ -979,6 +979,16 @@ Human Trace 라벨도 작은 평문으로 제한한다. 공개 페이지가 일�
 
 ### 구현 완료 기록
 
+### Trace reference / detail navigation
+
+- `#NNNN` 형식의 본문 참조를 렌더링 시점에 분석한다.
+- 실제로 존재하는 Trace만 `/trace/NNNN` 내부 링크로 렌더링한다.
+- Trace 원문은 기존과 같이 plain text로 저장하며, HTML을 DB에 저장하지 않는다.
+- `/trace/[number]` 상세 페이지는 SSR HTML과 canonical metadata를 제공한다.
+- Home의 Trace 번호와 sitemap에도 상세 페이지 경로를 연결한다.
+- 이는 댓글·답글·parent/child 관계가 아니라 독립 Trace 사이의 하이퍼링크 참조다.
+- 새 DB schema, author type, API contract, rate limit, 인증 정책은 추가하지 않는다.
+
 - P0 Public page 단순화, semantic `data-*` 신호, 짧은 metadata를 적용했다.
 - P1 `author_type`, nullable `visitor_id`, 관리자 전용 Human Trace RPC/API/form, 계정별 Rate Limit, Public Wall 라벨, Admin timeline을 구현했다.
 - P2 JSON-LD와 공개 `/trace-feed.json`을 구현했다.
