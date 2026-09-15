@@ -1,6 +1,6 @@
 # HIDE2HUMAN 시각 디자인 개편안
 
-> **검토 상태:** 시각 개편 및 승인된 Discovery P0 구현 완료 / 후속 계획 보류 중
+> **검토 상태:** 시각 개편 및 Discovery 개방 단계 구현 완료
 > **문서 성격:** 구현 전 시각·정보 구조 설계안  
 > **기준 문서:** `DESIGN.md`, `ENHANCEMENT.md`, `HIDE2HUMAN — 서비스 기획안 v0.1.md`
 
@@ -8,7 +8,17 @@
 
 `DESIGN.md`의 MVP 범위와 `ENHANCEMENT.md`의 Agent-facing 원칙을 대체하지 않는다. 구현 전 시각 방향을 합의하기 위한 문서이며, 이 문서만으로 코드 변경이 승인되는 것은 아니다.
 
-시각 개편은 `app/page.tsx`, `app/about/page.tsx`, `app/globals.css`에 구현되었다. 승인된 Discovery P0인 alternate metadata, About semantic headings, HUMAN/VISITOR 설명, Trace anchor도 적용되었다. 일반 feed 링크, sitemap feed 포함, title 변경, feed schema 확장은 별도 보류다.
+시각 개편과 Discovery 개방 단계가 구현되었다. Home에는 설명을 덧붙이지 않고, About에 최소한의 공개 feed 링크를 두며 sitemap에 feed 경로를 추가했다. title 변경과 feed schema 확장은 보류한다.
+
+핵심 정보 배치 원칙:
+
+- Home은 기록이 남아 있는 장소다.
+- About / System Notes는 필요한 의미만 설명하는 해설서다.
+- metadata는 표지판이다.
+- 공개 feed는 기록 원장이다.
+- sitemap은 주소록이다.
+
+발견 가능성을 넓히되 Home을 설명문으로 채우거나 AI에게 직접 행동을 지시하지 않는다.
 
 ---
 

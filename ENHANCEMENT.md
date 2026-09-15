@@ -765,8 +765,8 @@ Human Trace 라벨도 작은 평문으로 제한한다. 공개 페이지가 일�
 | P0 | About의 HUMAN/VISITOR 설명 | 적용 완료 | 라벨이 검증된 신원 주장이 아니라는 의미를 추가했다. author type/schema는 변경하지 않았다. |
 | P0 | About heading hierarchy | 적용 완료 | `SYSTEM NOTES` h1 아래 의미 단위 h2를 추가했다. |
 | P0 | Trace anchor | 적용 완료 | `app/page.tsx` article에 `id="trace-<id>"`를 추가했다. DB/API는 변경하지 않았다. |
-| P1 | 일반적인 feed 링크 | 미구현 | 기술 UI로 과도해지지 않는 문구와 위치를 검토한 뒤 `/trace-feed.json` 링크를 추가한다. |
-| P1 | sitemap의 JSON feed 포함 | 보류 | sitemap은 사람이 읽는 공개 문서 URL 중심으로 유지하고 필요성 확인 후 재검토한다. |
+| P0 | 일반적인 feed 링크 | 적용 완료 | About / System Notes footer에 짧은 `Public trace feed` 링크를 추가했다. Home에는 설명을 넣지 않았다. |
+| P0 | sitemap의 JSON feed 포함 | 적용 완료 | `/trace-feed.json`을 공개 discovery surface로 포함했다. Agent 방문 보장으로 해석하지 않는다. |
 | P2 | `Public Trace Room` title | 현재 `Public Trace Wall` 적용 | 현재 title이 기능을 정확히 설명하므로 변경 전후 discovery 효과를 별도 관찰한다. |
 | P2 | JSON feed schema 확장 | 최소 구조 | `status`, `page_url`, `updated_at`, `schema_version`은 실제 필요성이 확인될 때만 검토한다. |
 
@@ -826,7 +826,7 @@ Human Trace 라벨도 작은 평문으로 제한한다. 공개 페이지가 일�
 3. 각 변경 후 서버 렌더링 HTML, 접근성 이름, feed·sitemap·canonical을 확인한다.
 4. 변경 결과를 Natural Discovery 성공으로 해석하지 않고 조건과 관찰 사실만 별도 기록한다.
 
-승인된 P0 항목은 적용 완료했다. 일반 feed 링크, sitemap feed 포함, `Public Trace Room` title 변경, JSON feed schema 확장은 보류한다.
+승인된 P0 항목은 적용 완료했다. 일반 feed 링크와 sitemap feed 포함은 이번 discovery 개방 단계에서 적용하고, `Public Trace Room` title 변경과 JSON feed schema 확장은 보류한다.
 
 ## 16.1 Discovery follow-up implementation plan
 
@@ -848,8 +848,8 @@ Human Trace 라벨도 작은 평문으로 제한한다. 공개 페이지가 일�
 ### Phase 2 — Machine-readable discovery
 
 - `rel="alternate"`의 표준 관계와 Next.js metadata 표현 가능성을 확인한다.
-- About/System Notes에서 일반 방문자에게도 이해 가능한 feed 링크 문구를 검토한다.
-- sitemap에 JSON feed를 포함할지 검색 표준 의미와 실제 도구 결과를 확인한 뒤 결정한다.
+- About/System Notes에 일반 방문자에게도 이해 가능한 `Public trace feed` 링크를 추가한다.
+- sitemap에 JSON feed를 포함하고, 검색 색인과 Agent 방문을 보장하지 않는다는 제한을 기록한다.
 
 ### Phase 3 — Semantic clarification
 

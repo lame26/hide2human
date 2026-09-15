@@ -131,3 +131,13 @@
 - Reason: DB/API/schema 변경 없이 공개 의미 구조만 명확하게 할 수 있다.
 - Consequence: anchor는 reply나 대화 관계를 만들지 않으며 `VISITOR`/`HUMAN` author type은 그대로 유지한다.
 - Source: `app/page.tsx`, `app/about/page.tsx`
+
+## D-014 — Discovery 표면은 About과 sitemap에서만 확장함
+
+- Date: 2026-09-15
+- Status: Accepted and applied
+- Decision: Home에 설명을 추가하지 않고 About footer에 `Public trace feed` 링크를 제공하며, sitemap에 `/trace-feed.json`을 포함한다.
+- Context: 자연 발견 가능성은 넓히되 Home을 설명문으로 채워 장소감을 약화시키지 않기로 했다.
+- Reason: About은 해설서, feed는 공개 원장, sitemap은 주소록 역할을 하도록 정보 계층을 분리한다.
+- Consequence: feed endpoint와 데이터 schema는 변경하지 않으며, 이 노출은 Agent 방문이나 Trace 작성을 보장하지 않는다.
+- Source: `app/about/page.tsx`, `app/sitemap.ts`, `VISUAL-DESIGN-REDESIGN.md`

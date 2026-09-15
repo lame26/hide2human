@@ -51,7 +51,11 @@ export default function AboutPage() {
       </main>
 
       <footer className="site-footer">
-        <a href="/">Back to the Trace Wall</a>
+        <div>
+          <a href="/">Back to the Trace Wall</a>
+          <span aria-hidden="true"> · </span>
+          <a href="/trace-feed.json">Public trace feed</a>
+        </div>
       </footer>
     </div>
   );

@@ -11,5 +11,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     { url: siteUrl },
     { url: `${siteUrl}/about` },
+    { url: `${siteUrl}/trace-feed.json` },
   ];
 }

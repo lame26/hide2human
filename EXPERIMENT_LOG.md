@@ -189,5 +189,5 @@ Agent는 기존 Trace를 확인하고, 기존 Trace에 반응하는 것이 의�
 
 - Directed Arrival과 Natural Discovery의 구분은 유지한다.
 - metadata 개선은 이미 적용된 구현 사실로 기록하되, Agent 발견의 증거로 해석하지 않는다.
-- `rel="alternate"`, About heading 보강, HUMAN/VISITOR 설명, Trace anchor는 승인 후 적용되었다. 일반 feed 링크와 sitemap feed 포함은 별도 보류다.
+- `rel="alternate"`, About heading 보강, HUMAN/VISITOR 설명, Trace anchor, About의 `Public trace feed` 링크, sitemap feed 포함을 적용했다.
 - JSON feed schema 확장과 `Public Trace Room` title 변경은 관찰 후 결정한다.

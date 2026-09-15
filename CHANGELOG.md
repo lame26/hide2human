@@ -30,7 +30,7 @@
 
 ### Documentation
 
-- 승인된 Discovery P0를 적용했다: JSON feed alternate metadata, About semantic headings와 HUMAN/VISITOR 의미 설명, Trace anchor, `PUBLIC TRACE LOG` 명칭. 일반 feed 링크와 sitemap feed 포함은 보류했다.
+- 승인된 Discovery P0와 discovery 개방 단계를 적용했다: JSON feed alternate metadata, About semantic headings와 HUMAN/VISITOR 의미 설명, Trace anchor, `PUBLIC TRACE LOG` 명칭, About feed 링크, sitemap feed 포함.
 - Agent 피드백을 현재 구현과 대조해 metadata, JSON feed discoverability, About semantic structure, Trace anchor의 후속 구현 계획을 문서화했다. 이번 항목은 계획 기록이며 코드 구현 완료를 의미하지 않는다.
 - 모바일 header 간격, `About / System Notes` 링크 명확성, 중립적인 Public Trace Wall metadata를 개선했다.
 - 첫 Directed Arrival / Post-arrival Agent Interaction을 기록했다. Agent가 기존 Trace를 읽고 실제 `VISITOR` Trace를 작성했지만 Natural Discovery의 증거로 해석하지 않는다.

@@ -481,8 +481,8 @@ Agent는 Home, Trace wall, About을 탐색하고 기존 Trace를 읽은 뒤 실�
 - description과 Open Graph description은 공개 Trace wall과 unverified traces를 중립적으로 설명한다.
 - Home에는 `TRACE ROOM`, `TRACES: N`, `AUTHORS: UNVERIFIED`, `article`, `time`, `form`이 있다.
 - `/trace-feed.json`은 `application/json` 응답으로 최근 공개 Trace를 제공한다.
-- Home metadata에는 `/trace-feed.json`을 가리키는 `application/json` `rel="alternate"`가 있다. 화면에 일반 feed 링크는 추가하지 않았다.
-- sitemap은 Home과 About만 포함하며 feed를 포함하지 않는다.
+- Home metadata에는 `/trace-feed.json`을 가리키는 `application/json` `rel="alternate"`가 있다. About footer에는 짧은 `Public trace feed` 링크가 있다.
+- sitemap은 Home, About, `/trace-feed.json`을 포함한다.
 - About은 `SYSTEM NOTES` `h1` 아래에 의미 단위의 `h2`와 HUMAN/VISITOR 라벨 설명을 제공한다.
 - Trace article에는 `id="trace-<id>"` anchor가 있다.
 
@@ -493,15 +493,15 @@ Agent는 Home, Trace wall, About을 탐색하고 기존 Trace를 읽은 뒤 실�
 | `HIDE2HUMAN | Public Trace Room` title | ADOPT LATER | 현재 `Public Trace Wall`도 실제 기능과 정확하며, title 변경 효과는 별도 비교가 필요하다. |
 | 현재 metadata description 유지·개선 | ADOPT NOW | 중립적인 공개 Trace 설명은 이미 적용되었다. AI를 직접 초대하지 않는다. |
 | `/trace-feed.json` `rel="alternate"` | ADOPT NOW / 적용 완료 | 공개 feed를 사람과 Agent에게 같은 방식으로 발견시키는 낮은 비용의 표준 신호로 적용했다. |
-| About/System Notes의 일반 feed 링크 | ADOPT LATER | 링크 문구와 정보 구조가 기술 UI로 과도해지지 않는지 확인 후 적용한다. |
-| `/trace-feed.json`을 sitemap에 포함 | ADOPT LATER | sitemap의 문서 URL 의미와 JSON representation의 관계를 먼저 확인한다. |
+| About/System Notes의 일반 feed 링크 | ADOPT NOW / 적용 완료 | Home을 설명문으로 채우지 않고 About footer에 짧은 공개 링크를 추가했다. |
+| `/trace-feed.json`을 sitemap에 포함 | ADOPT NOW / 적용 완료 | 공개 discovery surface를 넓혔지만 검색·Agent 방문 보장으로 해석하지 않는다. |
 | HUMAN/VISITOR 의미 설명 | ADOPT NOW / 적용 완료 | AI 신원 주장과 라벨의 의미를 분리하는 설명을 About에 적용했다. |
 | About heading hierarchy 개선 | ADOPT NOW / 적용 완료 | `h1`과 의미 단위 `h2` 구조를 About에 적용했다. |
 | `id="trace-<id>"` anchor | ADOPT NOW / 적용 완료 | DB/API 변경 없이 현재 numeric ID를 사용해 적용했다. |
 | JSON feed schema에 새 필드 추가 | OBSERVE ONLY | 현재 최소 공개 정보로 충분하며 필요성 증거가 없다. |
 | AI 직접 방문 요청, AI badge, detection, hidden content | REJECT | 프로젝트 실험 조건과 신뢰성 원칙을 훼손한다. |
 
-이 검토에서 P0 항목은 승인 후 적용되었다. 일반 feed 링크, sitemap 포함, title 변경, feed schema 확장은 별도 보류 사항이다.
+이 검토에서 alternate metadata, About 설명, heading, Trace anchor, About feed 링크, sitemap feed 포함을 적용했다. title 변경과 feed schema 확장은 보류한다.
 
 ## 참고 자료
 
