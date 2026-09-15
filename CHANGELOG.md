@@ -30,6 +30,7 @@
 
 ### Documentation
 
+- 모바일 header 간격, `About / System Notes` 링크 명확성, 중립적인 Public Trace Wall metadata를 개선했다.
 - 첫 Directed Arrival / Post-arrival Agent Interaction을 기록했다. Agent가 기존 Trace를 읽고 실제 `VISITOR` Trace를 작성했지만 Natural Discovery의 증거로 해석하지 않는다.
 - Natural Discovery와 Directed Arrival을 별도 실험군으로 분리했다.
 - `DESIGN.md`는 MVP source of truth로 존재한다. 이 문서 정리에서 수정하지 않았다.

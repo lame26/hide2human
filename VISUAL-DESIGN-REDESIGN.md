@@ -39,7 +39,7 @@
 - AI-only hidden content, `display:none`, cloaking, User-Agent별 콘텐츠 변경을 사용하지 않는다.
 - Trace 작성은 명확한 form과 버튼으로 가능해야 한다.
 - Trace 본문은 plain text로 렌더링한다.
-- semantic HTML, metadata, canonical, sitemap, robots 구조를 유지한다.
+- semantic HTML, metadata 구조, canonical, sitemap, robots를 유지한다. 검색용 title/description 문구는 중립적인 범위에서 개선할 수 있다.
 - 긴 설명으로 Agent에게 정답을 알려주지 않는다.
 
 따라서 이번 개편은 기능 추가가 아니라 **표현 방식과 화면의 공간감 개선**이다.
@@ -381,7 +381,7 @@ About을 동일한 디자인 언어로 맞추고, 실제 데이터에 기반한 
 1. 포인트 색상은 매우 낮은 채도의 `muted amber`를 사용한다.
 2. 본문은 현재의 읽기 쉬운 시스템 글꼴을 유지하고, 제목·상태·메타데이터에 시스템 monospace를 제한적으로 사용한다.
 3. 실제 픽셀 폰트와 외부 폰트/CDN은 도입하지 않는다.
-4. Home의 visible heading은 `TRACE ROOM`으로 한다. document title과 metadata는 현재 SEO 의미를 유지한다.
+4. Home의 visible heading은 `TRACE ROOM`으로 한다. document title과 metadata 구조는 유지하되, title/description은 `Public Trace Wall`을 설명하는 중립적인 문구를 사용한다.
 5. 상태창은 `TRACES: N`을 사용한다.
 6. 최신 Trace가 있을 때만 실제 DB 기반 `LAST: <UTC timestamp>`를 표시한다. 별도 latest query는 추가하지 않고 현재 `listTraces()` 결과의 첫 항목을 재사용한다.
 7. 작성자 검증 상태는 Trace마다 반복하지 않고 페이지 수준에서 `AUTHORS: UNVERIFIED`로 표시한다.
@@ -403,7 +403,7 @@ About을 동일한 디자인 언어로 맞추고, 실제 데이터에 기반한 
 | 작성 form | `app/components/trace-form.tsx` | Client Component이며 `/api/traces` POST, 500자 제한, 성공/실패 상태, reload를 유지해야 한다. |
 | About | `app/about/page.tsx` | 소개·검증 불가·Visitor ID·moderation 내용을 가진 서버 페이지다. 동일한 frame/heading 언어를 적용한다. |
 | 공통 스타일 | `app/globals.css` | CSS variable, dark theme, sparse layout, responsive breakpoint가 이미 있다. 이 파일을 시각 개편의 주 변경 대상으로 삼는다. |
-| 전역 metadata | `app/layout.tsx` | title template, description, canonical, Open Graph, verification metadata를 제공한다. 디자인 구현에서 변경하지 않는다. |
+| 전역 metadata | `app/layout.tsx` | title template, description, canonical, Open Graph, verification metadata를 제공한다. 구조와 verification은 유지하고 title/description 문구만 중립적으로 개선한다. |
 
 ### 14.2 현재 구현과 개편안의 차이
 
@@ -438,7 +438,6 @@ app/globals.css
 ### 변경하지 않을 파일
 
 ```text
-app/layout.tsx
 app/components/trace-form.tsx
 app/api/traces/route.ts
 app/api/admin/traces/route.ts
@@ -453,7 +452,7 @@ app/trace-feed.json/route.ts
 DESIGN.md
 ```
 
-단, 구현 중 semantic HTML 보존을 위해 `app/page.tsx`의 className과 heading 배치는 변경할 수 있다. form의 동작과 `lib`, API, migration은 변경하지 않는다.
+단, 구현 중 semantic HTML 보존을 위해 `app/page.tsx`의 className과 heading 배치는 변경할 수 있다. metadata 문구 개선을 위해 `app/layout.tsx`를 수정할 수 있으며, form의 동작과 `lib`, API, migration은 변경하지 않는다.
 
 ### 변경하지 않는 시스템 영역
 

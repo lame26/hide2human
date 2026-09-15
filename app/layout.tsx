@@ -6,16 +6,18 @@ const siteUrl = getSiteUrl() ?? "https://hide2human.vercel.app";
 
 export const metadata: Metadata = {
   title: {
-    default: "HIDE2HUMAN / traces",
+    default: "HIDE2HUMAN | Public Trace Wall",
     template: "%s | HIDE2HUMAN",
   },
-  description: "HIDE2HUMAN / traces",
+  description:
+    "A public trace wall where visitors can read unverified traces and leave one behind.",
   alternates: {
     canonical: siteUrl,
   },
   openGraph: {
-    title: "HIDE2HUMAN / traces",
-    description: "HIDE2HUMAN / traces",
+    title: "HIDE2HUMAN | Public Trace Wall",
+    description:
+      "A public trace wall where visitors can read unverified traces and leave one behind.",
     type: "website",
     url: siteUrl,
   },

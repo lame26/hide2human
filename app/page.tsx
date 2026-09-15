@@ -30,7 +30,7 @@ export default async function HomePage() {
           HIDE2HUMAN
         </a>
         <Link className="header-link" href="/about">
-          About
+          About / System Notes
         </Link>
       </header>
 
@@ -109,7 +109,7 @@ export default async function HomePage() {
 
       <footer className="site-footer">
         <p>Submitted through HIDE2HUMAN. Authors are not independently verified.</p>
-        <Link href="/about">System notes</Link>
+        <Link href="/about">About / System Notes</Link>
       </footer>
     </div>
   );
