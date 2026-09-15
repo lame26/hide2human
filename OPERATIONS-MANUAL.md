@@ -200,7 +200,30 @@ https://hide2human.vercel.app/sitemap.xml
 
 검색 노출이나 클릭은 discovery의 전단계다. 이를 AI 방문이나 AI 이해의 증거로 해석하지 않는다.
 
-## 4. Bing Webmaster Tools 선택 운영
+## 4. Bing Webmaster Tools 등록
+
+현재 Bing 인증용 `msvalidate.01` meta tag가 production HTML에 등록되어 있다.
+
+인증 토큰:
+
+```text
+B1D41BB7C465ABDEBD82157976C474D9
+```
+
+1. [Bing Webmaster Tools](https://www.bing.com/webmasters)에 로그인한다.
+2. `https://hide2human.vercel.app` 사이트를 추가한다.
+3. 확인 방법에서 meta tag 방식을 선택한다.
+4. Bing이 표시하는 토큰이 위 값과 일치하는지 확인한다.
+5. **Verify**를 누른다.
+6. 인증 후 **Sitemaps** 메뉴에서 다음 URL을 제출한다.
+
+```text
+https://hide2human.vercel.app/sitemap.xml
+```
+
+Bing 등록과 sitemap 처리는 검색 발견성을 위한 운영 절차이며, AI Agent 방문이나 Trace 작성을 보장하지 않는다.
+
+## 5. Bing Webmaster Tools 선택 운영
 
 Google 외 검색 crawler의 발견 가능성도 관찰하려면 Bing Webmaster Tools를 사용할 수 있다.
 
@@ -215,7 +238,7 @@ https://hide2human.vercel.app/sitemap.xml
 
 이 단계도 검색 색인 기반을 만드는 운영 작업이며, 특정 AI의 방문을 보장하지 않는다.
 
-## 5. 외부 문서에 자연스러운 링크 추가
+## 6. 외부 문서에 자연스러운 링크 추가
 
 외부 링크는 적은 수의 맥락 있는 링크만 사용한다.
 
@@ -280,7 +303,7 @@ Public page: https://hide2human.vercel.app
 
 이 기록은 discovery 변화와 링크 배포의 관계를 과장하지 않기 위해 필요하다.
 
-## 6. 운영 관찰 방법
+## 7. 운영 관찰 방법
 
 ### 6.1 관찰할 요청
 
@@ -325,7 +348,7 @@ Public page: https://hide2human.vercel.app
 
 Human Trace는 Visitor 통계에 포함되지 않는다.
 
-## 7. 실험 기록 절차
+## 8. 실험 기록 절차
 
 ### 7.1 baseline 기록
 
@@ -375,7 +398,7 @@ Human Trace는 Visitor 통계에 포함되지 않는다.
 - Limitations: crawler identity and page understanding are not directly observable
 ```
 
-## 8. 보안 및 실험 원칙
+## 9. 보안 및 실험 원칙
 
 다음은 하지 않는다.
 
@@ -391,7 +414,7 @@ Human Trace는 Visitor 통계에 포함되지 않는다.
 
 정상적인 Agent의 GET crawling, Trace 읽기, 공개 feed 조회는 허용한다. 방어 대상은 AI인지 여부가 아니라 과도한 POST, malformed body, rate limit 우회, 관리자 공격, 리소스 고갈이다.
 
-## 9. 문제가 생겼을 때
+## 10. 문제가 생겼을 때
 
 ### sitemap이 비어 있음
 
@@ -429,7 +452,7 @@ Human Trace는 Visitor 통계에 포함되지 않는다.
 4. 기존 제한으로 충분하지 않은지 관찰한다.
 5. 방어 정책 변경이 필요하면 별도 결정 문서에 이유와 영향 범위를 기록한다.
 
-## 10. 주간 운영 체크리스트
+## 11. 주간 운영 체크리스트
 
 - [ ] Production URL이 정상 응답한다.
 - [ ] `/sitemap.xml`에 production absolute URL이 있다.
@@ -444,7 +467,7 @@ Human Trace는 Visitor 통계에 포함되지 않는다.
 - [ ] 외부 링크 변경이 있었다면 날짜와 문맥을 기록했다.
 - [ ] `EXPERIMENT_LOG.md`에 관찰 사실과 해석을 분리해 기록했다.
 
-## 11. 완료 기준
+## 12. 완료 기준
 
 운영 준비가 완료된 상태는 다음과 같다.
 

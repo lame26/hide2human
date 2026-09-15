@@ -24,6 +24,9 @@ export const metadata: Metadata = {
       "pvwkDtaPnN8loPPC-VA-BizPJeBx5HJKb-IzJzj2A_s",
       "VhyguJvrAZa3OgNoN1a5f6DfLWL5y73Nb3RFCurnVVw",
     ],
+    other: {
+      "msvalidate.01": "B1D41BB7C465ABDEBD82157976C474D9",
+    },
   },
 };
 
