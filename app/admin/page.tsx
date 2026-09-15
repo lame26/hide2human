@@ -53,7 +53,7 @@ export default async function AdminPage() {
       .from("traces")
       .select("id, message, created_at, visitor_id, author_type")
       .order("created_at", { ascending: false })
-      .limit(100),
+      .limit(50),
     supabase.from("traces").select("id", { count: "exact", head: true }),
     supabase.from("visitors").select("id", { count: "exact", head: true }),
     supabase.from("visitors").select("visit_count, trace_count").limit(10000),
@@ -61,7 +61,7 @@ export default async function AdminPage() {
       .from("visit_events")
       .select("id, visitor_id, path, user_agent, referrer, created_at")
       .order("created_at", { ascending: false })
-      .limit(50),
+      .limit(25),
     supabase
       .from("traces")
       .select("id", { count: "exact", head: true })
@@ -148,7 +148,10 @@ export default async function AdminPage() {
         </section>
         <section aria-labelledby="timeline-title">
           <p className="kicker">Observation</p>
-          <h2 id="timeline-title">Trace and visit timeline</h2>
+          <h2 id="timeline-title">Recent activity</h2>
+          <p className="section-note admin-note">
+            Showing the latest {timeline.length} traces and visits.
+          </p>
           <div className="trace-list">
             {timeline.map((event) => (
               <article className="trace" key={event.id}>
@@ -162,17 +165,27 @@ export default async function AdminPage() {
         <section aria-labelledby="visits-title">
           <p className="kicker">Observation</p>
           <h2 id="visits-title">Recent visits</h2>
-          <div className="trace-list">
+          <div className="admin-visit-list">
             {(visitEvents ?? []).map((visit) => (
-              <article className="trace" key={visit.id}>
-                <p className="trace-label">{visit.path}</p>
-                <p className="trace-message">Visitor {visit.visitor_id}</p>
-                <time dateTime={visit.created_at}>{visit.created_at}</time>
-                <p className="trace-status">
-                  {visit.user_agent ?? "Unknown user agent"}
-                  {visit.referrer ? ` · ${visit.referrer}` : ""}
-                </p>
-              </article>
+              <details className="admin-visit" key={visit.id}>
+                <summary>
+                  <span>
+                    <strong>{visit.path}</strong>
+                    <small>Visitor {visit.visitor_id.slice(0, 8)}…</small>
+                  </span>
+                  <time dateTime={visit.created_at}>{visit.created_at}</time>
+                </summary>
+                <dl>
+                  <div>
+                    <dt>User-Agent</dt>
+                    <dd>{visit.user_agent ?? "Unknown"}</dd>
+                  </div>
+                  <div>
+                    <dt>Referrer</dt>
+                    <dd>{visit.referrer ?? "None"}</dd>
+                  </div>
+                </dl>
+              </details>
             ))}
           </div>
         </section>
