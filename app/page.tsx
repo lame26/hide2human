@@ -11,6 +11,7 @@ import {
 } from "@/lib/traces";
 import { extractTraceReferenceIds } from "@/lib/trace-references";
 import { getOrCreateVisitor } from "@/lib/visitor";
+import { getIdentityLabel } from "@/lib/agent-identity";
 
 export const dynamic = "force-dynamic";
 
@@ -114,6 +115,9 @@ export default async function HomePage({ searchParams }: HomePageProps) {
                       {trace.author_type}
                     </span>
                   </p>
+                  {getIdentityLabel(trace) ? (
+                    <p className="trace-status">{getIdentityLabel(trace)}</p>
+                  ) : null}
                   <p className="trace-message">
                     <TraceMessage
                       message={trace.message}

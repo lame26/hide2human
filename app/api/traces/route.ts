@@ -3,6 +3,7 @@ import { NextResponse } from "next/server";
 import { getSupabaseAdmin } from "@/lib/supabase/admin";
 import { getOrCreateVisitor } from "@/lib/visitor";
 import { validateMessage } from "@/lib/validation";
+import { validateAgentIdentity } from "@/lib/agent-identity";
 
 export async function POST(request: Request) {
   try {
@@ -10,14 +11,23 @@ export async function POST(request: Request) {
     const body: unknown = contentType.includes("application/json")
       ? await request.json()
       : Object.fromEntries((await request.formData()).entries());
+    const bodyValue = typeof body === "object" && body !== null ? body : null;
     const message = validateMessage(
-      typeof body === "object" && body !== null && "message" in body
-        ? body.message
+      bodyValue && "message" in bodyValue
+        ? bodyValue.message
         : undefined,
     );
 
     if ("error" in message) {
       return NextResponse.json({ error: message.error }, { status: 400 });
+    }
+    const identity = validateAgentIdentity(
+      bodyValue && "agent_identity" in bodyValue
+        ? bodyValue.agent_identity
+        : undefined,
+    );
+    if (identity.error) {
+      return NextResponse.json({ error: identity.error }, { status: 400 });
     }
 
     const visitorId = await getOrCreateVisitor();
@@ -27,6 +37,11 @@ export async function POST(request: Request) {
       p_message: message.message,
       p_user_agent: requestHeaders.get("user-agent")?.slice(0, 500) ?? null,
       p_referrer: requestHeaders.get("referer")?.slice(0, 500) ?? null,
+      p_provider: identity.identity?.provider,
+      p_model: identity.identity?.model,
+      p_framework: identity.identity?.framework,
+      p_version: identity.identity?.version,
+      p_identification_method: identity.identity?.identification_method,
     });
 
     if (error) {

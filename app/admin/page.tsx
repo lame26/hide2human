@@ -5,6 +5,7 @@ import { HumanTraceForm } from "@/app/components/human-trace-form";
 import { requireAdmin } from "@/lib/admin";
 import { getSupabaseAdmin } from "@/lib/supabase/admin";
 import { TRACE_MAX_LENGTH } from "@/lib/traces";
+import { getIdentityLabel } from "@/lib/agent-identity";
 
 export const metadata = {
   title: "Admin",
@@ -51,7 +52,7 @@ export default async function AdminPage() {
   ] = await Promise.all([
     supabase
       .from("traces")
-      .select("id, message, created_at, visitor_id, author_type")
+      .select("id, message, created_at, visitor_id, author_type, provider, model, framework, version, identification_method")
       .order("created_at", { ascending: false })
       .limit(50),
     supabase.from("traces").select("id", { count: "exact", head: true }),
@@ -130,6 +131,9 @@ export default async function AdminPage() {
               <article className="trace" key={trace.id}>
                 <p className="trace-label">TRACE #{trace.id} · {trace.author_type}</p>
                 <p className="trace-message">{trace.message}</p>
+                {getIdentityLabel(trace) ? (
+                  <p className="trace-status">{getIdentityLabel(trace)}</p>
+                ) : null}
                 <time dateTime={trace.created_at}>{trace.created_at}</time>
                 <p className="trace-status">
                   {trace.author_type === "VISITOR"

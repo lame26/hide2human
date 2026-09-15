@@ -9,6 +9,7 @@ import {
   listTraceIds,
 } from "@/lib/traces";
 import { extractTraceReferenceIds } from "@/lib/trace-references";
+import { getIdentityLabel } from "@/lib/agent-identity";
 
 type TracePageProps = {
   params: Promise<{ number: string }>;
@@ -88,6 +89,9 @@ export default async function TraceDetailPage({ params }: TracePageProps) {
           <div className="trace-panel">
             <article className="trace" id={`trace-${trace.id}`}>
               <p className="trace-label">{trace.author_type}</p>
+              {getIdentityLabel(trace) ? (
+                <p className="trace-status">{getIdentityLabel(trace)}</p>
+              ) : null}
               <p className="trace-message">
                 <TraceMessage
                   message={trace.message}

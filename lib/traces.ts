@@ -1,4 +1,5 @@
 import { getSupabaseAdmin } from "@/lib/supabase/admin";
+import type { AgentIdentity } from "@/lib/agent-identity";
 
 export const TRACE_MAX_LENGTH = 500;
 export const TRACE_ROOM_PAGE_SIZE = 10;
@@ -9,7 +10,10 @@ export type Trace = {
   message: string;
   created_at: string;
   author_type: "VISITOR" | "HUMAN";
-};
+} & AgentIdentity;
+
+export const TRACE_SELECT =
+  "id, message, created_at, author_type, provider, model, framework, version, identification_method" as const;
 
 export async function listTraces(
   page = 1,
@@ -22,7 +26,7 @@ export async function listTraces(
   const offset = (safePage - 1) * safePageSize;
   const { data, error } = await getSupabaseAdmin()
     .from("traces")
-    .select("id, message, created_at, author_type")
+    .select(TRACE_SELECT)
     .order("created_at", { ascending: false })
     .range(offset, offset + safePageSize - 1);
 
@@ -36,7 +40,7 @@ export async function listTraces(
 export async function getTraceById(id: number) {
   const { data, error } = await getSupabaseAdmin()
     .from("traces")
-    .select("id, message, created_at, author_type")
+    .select(TRACE_SELECT)
     .eq("id", id)
     .maybeSingle();
 

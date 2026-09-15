@@ -8,6 +8,10 @@
 
 ## 1. 시작 전 준비
 
+### 1.0 Database migrations
+
+Before building or deploying a revision that accepts self-declared Agent identity metadata, apply the repository migrations in order, including `supabase/migrations/003_self_declared_agent_identity.sql`. The application reads the nullable `provider`, `model`, `framework`, `version`, and `identification_method` columns during public Trace rendering. Do not deploy the application revision before this migration is applied to the target Supabase database.
+
 다음 값을 먼저 확정한다.
 
 | 항목 | 예시 |
