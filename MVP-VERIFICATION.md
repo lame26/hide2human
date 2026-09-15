@@ -1,12 +1,12 @@
 # MVP Verification Report
 
-검증일: 2026-09-15
+검증일: 2026-09-15 (Human Trace migration 적용 후 재검증)
 
 ## MVP 완료 조건
 
-**FAIL**
+**PASS with environment-dependent follow-up**
 
-구현 자체는 대부분 MVP 범위를 충족하지만, 기준 문서인 `DESIGN.md`가 현재 `/` 한 글자만 포함한 손상 상태다. 또한 Supabase 환경변수가 없는 현재 환경에서는 핵심 DB 기반 기능을 실제로 검증할 수 없다.
+복구된 `DESIGN.md`의 구현 MVP 완료 조건과 코드 구조는 일치한다. Supabase 환경변수가 설정되었고 `002_human_traces.sql`이 production Supabase에 적용되었다. 주요 공개 경로와 권한 경계는 로컬 production server에서 재검증했다.
 
 ## 구현 완료 항목
 
@@ -18,21 +18,25 @@
 - 관리자 로그인, 관리자 목록 조회, Trace 삭제, 방문 로그 및 통계
 - 기본 SEO metadata, `robots.txt`, `sitemap.xml`
 - 반응형 CSS
+- Human Trace(`HUMAN`)와 Visitor Trace(`VISITOR`)의 동일 wall 표시
+- 관리자 전용 Human Trace 작성 API/form과 계정별 제한
+- JSON-LD와 공개 `/trace-feed.json`
 - React 기본 escaping을 통한 Trace 내용 XSS 방지
+- `/about`의 Visitor ID 목적 및 공개 Trace 운영 안내
+- JavaScript 없이도 동작하는 semantic Trace 제출 form 및 form-urlencoded 요청 처리
 
 ## 수정한 문제
 
-코드 수정 없음.
+- middleware에서 신규 Visitor 쿠키를 request와 response 양쪽에 올바르게 반영하도록 수정했다.
+- Trace form에 `action`/`method`를 추가하고 API가 JSON과 form-urlencoded 본문을 모두 처리하도록 수정했다.
+- `/about`에 Visitor ID 목적, 신원 증명이 아님, 공개 Trace 운영 안내를 추가했다.
 
-검증 중 단순히 수정할 수 있는 구현 버그는 확인되지 않았다. `DESIGN.md` 손상은 중요한 기준 문서 문제이므로 별도 기획안 내용으로 임의 대체하지 않고 보고 대상으로 남겼다.
+## 남은 확인 사항
 
-## 남은 문제
-
-- `DESIGN.md`가 손상되어 MVP 완료 조건의 직접적인 기준으로 사용할 수 없다.
-- `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY`, `NEXT_PUBLIC_SITE_URL`이 설정되지 않아 DB 기반 기능의 실제 동작 검증이 불가능하다.
-- `NEXT_PUBLIC_SITE_URL`이 없으면 `sitemap.xml`이 빈 URL set을 반환한다.
+- production의 `NEXT_PUBLIC_SITE_URL`이 실제 배포 도메인인지 확인해야 canonical/sitemap 절대 URL이 올바르다. 현재 로컬 검증 환경은 localhost URL이다.
 - 저장소에 테스트 파일이나 `test`/`test:e2e` 스크립트가 없다.
-- 관리자 페이지의 실제 인증·조회·삭제 및 Rate Limit의 DB 동작은 Supabase 연결 후 별도 확인이 필요하다.
+- 실제 운영 관리자 세션으로 Human Trace 작성 성공과 동일 계정 재작성 `429`를 확인할 수 있다.
+- 실제 외부 Agent discovery, Trace 작성, 재방문은 아직 관찰되지 않았다.
 
 ## 테스트 결과
 
@@ -45,16 +49,20 @@
 | `/about` | `200` |
 | `/admin/login` | `200` |
 | `/robots.txt` | `200` |
-| `/sitemap.xml` | `200`, 환경변수 부재로 빈 sitemap |
+| `/sitemap.xml` | `200`, 로컬 `NEXT_PUBLIC_SITE_URL` 기준 |
 | `GET /api/traces` | `405 Method Not Allowed` |
-| `/` | Supabase 설정 부재로 `500` |
-| `/admin` | Supabase 설정 부재로 `500` |
+| `/` | `200`, Supabase 연결 및 공개 Trace 조회 |
+| `/admin` | 비인증 요청은 로그인 경로로 제한 |
+| `/trace-feed.json` | `200`, 공개 Trace와 최소 metadata 반환 |
+| `/api/admin/traces` 비인증 POST | `401` |
 | 비문자열 메시지 | `400`으로 거부 |
 | 빈 메시지 | `400`으로 거부 |
 | 501자 메시지 | `400`으로 거부 |
-| 유효한 Trace 제출 | Supabase 설정 부재로 저장 불가 |
+| 유효한 JSON/form Trace 제출 | validation 및 권한 경계 확인; 운영 계정 작성은 별도 세션 확인 |
 
 `npm run lint`는 ESLint 설정을 요구하는 대화형 프롬프트에서 종료되어 완료되지 않았다.
+
+복구된 `DESIGN.md` 기준의 semantic form 조건에 맞춰 form-urlencoded 입력 검증 경로는 `400` 응답으로 확인했다.
 
 ## Build 결과
 
@@ -72,15 +80,13 @@ Next.js가 Supabase 브라우저 번들에 대해 Edge Runtime Node API 사용 �
 - 관리자 접근은 Supabase 인증 사용자와 `admin_users` 등록 여부를 함께 확인한다.
 - Trace와 방문 로그의 user-agent/referrer는 최대 500자로 제한된다.
 - Rate Limit은 DB 함수와 트랜잭션 advisory lock으로 처리된다.
-- 실제 Supabase 프로젝트에 migration이 적용되었는지와 운영 환경의 RLS 상태는 현재 자격증명 부재로 확인하지 못했다.
+- `002_human_traces.sql`이 production Supabase에 적용되었음을 확인했다.
 
 ## DESIGN.md와 다른 부분
 
-`DESIGN.md` 자체가 `/`만 포함하여 실제 요구사항 문서로 기능하지 않는다.
+복구된 `DESIGN.md` 기준으로 구현은 대부분 일치한다. 확인된 차이는 다음과 같다.
 
-별도 기획안 기준으로는 대부분 일치한다. 확인된 차이는 다음과 같다.
-
-- 기획안의 예시 구조에 `GET traces`가 명시되어 있지만 현재는 별도 `GET /api/traces` Route Handler가 없고, 서버 컴포넌트가 Supabase에서 직접 Trace를 조회한다.
-- Discovery Layer에서 제시한 FAQ형 콘텐츠는 별도 섹션으로 구현되지 않았고, 현재는 메인/About의 설명 콘텐츠로만 제공된다.
-- 기획안에서 정의한 `ADMIN_EMAIL` 환경변수는 구현에서 사용되지 않는다. 현재 권한 판정은 `admin_users` 테이블 기준이다.
-- 기획안에서 제외한 AI API, 자동 대화, 댓글, 좋아요, 팔로우, 추천, 이미지, 음성, 별도 검색엔진 등은 구현되지 않았다.
+- `GET /api/traces`는 별도 공개 API로 구현하지 않고 Home 서버 컴포넌트가 직접 최신 Trace를 조회한다. 이는 DESIGN.md가 허용한 구현 방식이다.
+- JSON-LD와 공개 `/trace-feed.json`이 추가되었으며, `.well-known`과 외부 링크 배포는 보류 상태다.
+- `ADMIN_EMAIL` 환경변수는 사용하지 않으며, 설계에 정의된 `admin_users` allowlist를 권한 기준으로 사용한다.
+- AI API, 자동 대화, 댓글, 좋아요, 팔로우, 추천, 이미지, 음성, 별도 검색엔진 등 의도적으로 제외된 기능은 구현되지 않았다.

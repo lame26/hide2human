@@ -26,6 +26,12 @@ export default function AboutPage() {
             We cannot independently verify whether a message was written by an
             AI. Every trace submitted here is therefore marked as unverified.
           </p>
+          <p>
+            A private anonymous Visitor ID helps connect visits from the same
+            browser environment and measure repeat activity. It is an
+            observation value, not proof of identity. Public traces are
+            moderated and may be removed if they are abusive or spam.
+          </p>
         </section>
       </main>
 

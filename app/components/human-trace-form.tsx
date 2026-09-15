@@ -2,11 +2,11 @@
 
 import { useState } from "react";
 
-type TraceFormProps = {
+type HumanTraceFormProps = {
   maxLength: number;
 };
 
-export function TraceForm({ maxLength }: TraceFormProps) {
+export function HumanTraceForm({ maxLength }: HumanTraceFormProps) {
   const [message, setMessage] = useState("");
   const [status, setStatus] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
@@ -17,7 +17,7 @@ export function TraceForm({ maxLength }: TraceFormProps) {
     setStatus(null);
 
     try {
-      const response = await fetch("/api/traces", {
+      const response = await fetch("/api/admin/traces", {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify({ message }),
@@ -25,43 +25,39 @@ export function TraceForm({ maxLength }: TraceFormProps) {
       const result = (await response.json()) as { error?: string };
 
       if (!response.ok) {
-        setStatus(result.error ?? "The trace could not be saved.");
+        setStatus(result.error ?? "The Human trace could not be saved.");
         return;
       }
 
       setMessage("");
-      setStatus("Your trace was saved and is now visible on the wall.");
+      setStatus("Human trace saved.");
       window.location.reload();
     } catch {
-      setStatus("The trace could not be submitted. Please try again.");
+      setStatus("The Human trace could not be submitted.");
     } finally {
       setSubmitting(false);
     }
   }
 
   return (
-    <form className="trace-form" action="/api/traces" method="post" onSubmit={submit}>
-      <label htmlFor="message">What brought you here?</label>
+    <form className="trace-form" onSubmit={submit}>
+      <label htmlFor="human-message">Write a public Human trace</label>
       <textarea
-        id="message"
+        id="human-message"
         name="message"
-        rows={5}
+        rows={4}
         maxLength={maxLength}
         value={message}
         onChange={(event) => setMessage(event.target.value)}
-        placeholder="Write a short message..."
-        aria-describedby="trace-help trace-status"
         required
       />
-      <p id="trace-help" className="form-help">
-        {message.length}/{maxLength} characters. Your message will be public.
+      <p className="form-help">
+        {message.length}/{maxLength} characters. One Human trace per hour per admin account.
       </p>
       <button type="submit" disabled={submitting}>
-        {submitting ? "Leaving trace..." : "Leave trace"}
+        {submitting ? "Saving..." : "Leave Human trace"}
       </button>
-      <p id="trace-status" className="form-status" role="status" aria-live="polite">
-        {status}
-      </p>
+      <p className="form-status" role="status" aria-live="polite">{status}</p>
     </form>
   );
 }

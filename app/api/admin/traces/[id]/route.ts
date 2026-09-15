@@ -19,7 +19,7 @@ export async function DELETE(
   const supabase = getSupabaseAdmin();
   const { data: trace, error: findError } = await supabase
     .from("traces")
-    .select("id, visitor_id")
+    .select("id, visitor_id, author_type")
     .eq("id", id)
     .maybeSingle();
 
@@ -35,18 +35,23 @@ export async function DELETE(
     throw new Error(`Unable to delete trace: ${deleteError.message}`);
   }
 
-  const { count: remainingCount, error: countError } = await supabase
-    .from("traces")
-    .select("id", { count: "exact", head: true })
-    .eq("visitor_id", trace.visitor_id);
-  if (countError) {
-    throw new Error(`Unable to update visitor count: ${countError.message}`);
-  }
+  if (trace.author_type === "VISITOR" && trace.visitor_id) {
+    const { count: remainingCount, error: countError } = await supabase
+      .from("traces")
+      .select("id", { count: "exact", head: true })
+      .eq("visitor_id", trace.visitor_id);
+    if (countError) {
+      throw new Error(`Unable to update visitor count: ${countError.message}`);
+    }
 
-  await supabase
-    .from("visitors")
-    .update({ trace_count: remainingCount ?? 0 })
-    .eq("id", trace.visitor_id);
+    const { error: updateError } = await supabase
+      .from("visitors")
+      .update({ trace_count: remainingCount ?? 0 })
+      .eq("id", trace.visitor_id);
+    if (updateError) {
+      throw new Error(`Unable to update visitor count: ${updateError.message}`);
+    }
+  }
 
   return NextResponse.json({ deleted: true });
 }

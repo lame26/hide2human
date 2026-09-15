@@ -1,10 +1,15 @@
 import { headers } from "next/headers";
 import { NextResponse } from "next/server";
+import { requireAdmin } from "@/lib/admin";
 import { getSupabaseAdmin } from "@/lib/supabase/admin";
-import { getOrCreateVisitor } from "@/lib/visitor";
 import { validateMessage } from "@/lib/validation";
 
 export async function POST(request: Request) {
+  const user = await requireAdmin();
+  if (!user) {
+    return NextResponse.json({ error: "Unauthorized." }, { status: 401 });
+  }
+
   try {
     const contentType = request.headers.get("content-type") ?? "";
     const body: unknown = contentType.includes("application/json")
@@ -20,30 +25,32 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: message.error }, { status: 400 });
     }
 
-    const visitorId = await getOrCreateVisitor();
-    const requestHeaders = await headers();
-    const { data, error } = await getSupabaseAdmin().rpc("create_trace", {
-      p_visitor_id: visitorId,
+    const { data, error } = await getSupabaseAdmin().rpc("create_human_trace", {
+      p_author_user_id: user.id,
       p_message: message.message,
-      p_user_agent: requestHeaders.get("user-agent")?.slice(0, 500) ?? null,
-      p_referrer: requestHeaders.get("referer")?.slice(0, 500) ?? null,
     });
 
     if (error) {
-      if (error.message.includes("rate_limited")) {
+      if (error.message.includes("human_rate_limited")) {
         return NextResponse.json(
-          { error: "Please wait before leaving another trace." },
+          { error: "Please wait before leaving another Human trace." },
           { status: 429 },
         );
       }
-      throw new Error(`Unable to save trace: ${error.message}`);
+      throw new Error(`Unable to save Human trace: ${error.message}`);
     }
+
+    const requestHeaders = await headers();
+    console.info("Human trace created", {
+      traceId: data?.id,
+      userAgent: requestHeaders.get("user-agent")?.slice(0, 120) ?? null,
+    });
 
     return NextResponse.json({ trace: data }, { status: 201 });
   } catch (error) {
-    console.error("Trace submission failed", error);
+    console.error("Human trace submission failed", error);
     return NextResponse.json(
-      { error: "The trace could not be saved right now." },
+      { error: "The Human trace could not be saved right now." },
       { status: 500 },
     );
   }
